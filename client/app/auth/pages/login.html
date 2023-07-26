@@ -1,0 +1,45 @@
+<template name="pagesLogin">
+
+    <!-- Logo -->
+
+    <div class="pagesLogin d-flex flex-column align-items-center ">
+
+        <div class="container-fluid">
+            <div class="row justify-content-center ">
+                <div class="form-floating ">
+                    <h1 class="fw-bolder display-4  text-center py-3">Login</h1>
+
+                    <form class="d-flex flex-column gap-2 mb-3" style="min-width: 350px;">
+                        <div class="emailBox mb-3">
+                            <input type="email" class="form-control rounded-5 " name="emailAddress" id="email" placeholder="Email">
+                        </div>
+                        <div class="passBox">
+                            <input type="password" class="form-control rounded-5" name="password" id="password" 
+                                placeholder="Password">
+                                
+                        </div>
+
+                        <div class="forgotBox">
+                            <a href="/forgot-password" class="pt-1 d-flex justify-content-center">Forgot password?</a>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="text-center py-3">
+                <span class="font-weight-normal">Do not have an account </span>
+                <br>
+                <a class="text-decoration-underline" href="/sign-in">Sign In</a>
+
+            </div>
+        </div>
+
+    </div>
+
+</template>

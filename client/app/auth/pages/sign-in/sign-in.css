@@ -1,0 +1,46 @@
+.pagesSignIn {
+    background-image: url('/images/pexels-elijah-odonnel2.jpg');
+    
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagesSignIn h1, p {
+    color: rgb(206, 232, 206);
+    /* Etiketin rengini üst öğeden devralınan rengi kullanacak şekilde ayarlar */
+    opacity: 0.8;
+}
+
+.pagesSignIn input {
+    background-color: rgb(185, 212, 198);
+    opacity: 0.8;
+    display: flex;
+    width: 450px;
+    height: 55px;
+    text-align: center; 
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.pagesSignIn button {    
+    background-color: rgb(120, 181, 41);
+    width: 150px;
+}
+
+.pagesSignIn input::placeholder {
+    color:rgb(120, 181, 41);
+}
+
+.alreadyHaveAnAcc {
+    font-weight: bold;
+}
+
+.alreadyHaveAnAcc a{
+    color :rgb(80, 218, 34);
+    
+}

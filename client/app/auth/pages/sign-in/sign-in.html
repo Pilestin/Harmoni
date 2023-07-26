@@ -1,0 +1,55 @@
+<template name="pagesSignIn">
+
+  
+  <div class="pagesSignIn container-fluid bg-secondary">
+    <div class="d-flex flex-column flex-fill align-items-center justify-content-center h-100">
+
+      <div class="form-floating">
+
+        <h1 class="fw-bolder display-5 text-center py-3">Sign in</h1>
+        <p class="d-flex justify-content-center fw-semibold pb-3">Create a new account.</p>
+
+        <form class="brd-loading-section d-flex flex-column gap-2" style="min-width: 350px;">
+          <div class="form-floating">
+            <input type="text" class="form-control brd-border-bottom-unset rounded-5 " id="firstName" placeholder="firstName">
+            <label for="firstName" class="customlabel">First Name</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control brd-border-bottom-unset brd-border-top-unset rounded-5 " id="lastName"
+              placeholder="lastName">
+            <label for="lastName">Last name</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="email" class="form-control brd-border-bottom-unset brd-border-top-unset rounded-5 " id="emailAddress"
+              placeholder="name@example.com">
+            <label for="emailAddress">Email address</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="password" class="form-control brd-border-bottom-unset brd-border-top-unset rounded-5 " id="password"
+              placeholder="*****">
+            <label for="password">Password</label>
+          </div>
+
+          <!-- <div class="form-floating">
+            <input type="password" class="form-control brd-border-top-unset rounded-5 " id="passwordAgain" placeholder="*****">
+            <label for="passwordAgain">Password Again</label>
+          </div> -->
+
+          <div class="text-center mt-3 mb-3">
+            <button type="submit" class="btn btn-success">Sign In</button>
+        </div>
+
+          <div class="text-center text-success alreadyHaveAnAcc">
+            <span class="font-weight-normal">Already have an account</span>
+            <br>
+            <a href="/login" class="text-decoration-underline pt-3 ">Login</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</template>
