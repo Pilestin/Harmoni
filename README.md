@@ -16,6 +16,8 @@ Goals:
 
 ### Koleksiyonlar (Collections) : : 
 
+![Untitled](https://github.com/Pilestin/Harmoni/assets/56133248/62fda4ff-3c7e-4bce-bd35-25ec018e1d1b)
+
 
 1. **Kullanıcılar (Users) :** 
 - Kullanıcıların kimlik bilgilerini, e-posta, şifre gibi giriş bilgilerini içerir.
