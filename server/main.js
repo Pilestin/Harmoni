@@ -43,11 +43,6 @@ Meteor.methods({'list_user' : function(){
 
 
 
-const clientId = 'e79bdf75e15f40bf988fb0115dad338d';
-const clientSecret = 'eb1701e836bb410c86df374163c828d6';
-
-
-
 async function getAccessToken() {
   const url = 'https://accounts.spotify.com/api/token';
   const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
