@@ -4,11 +4,14 @@
         
         {{> componentsNavbar}}
     
-        <div class="flex-fill bg-danger py-0">
+        <div class="flex-fill  py-0">
           {{> Template.dynamic template=page}}
         </div>
-    
+        
         {{> componentsFooter}}
+
+        {{> componentsPlayer}}
+        
       {{else}}
       <div class="container">
         <div style="height: 100vh;" class="d-flex justify-content-center align-items-center flex-column  bg-warning rounded-5 gap-2 py-4 text-center">

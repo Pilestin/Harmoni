@@ -1,0 +1,1 @@
+// oncreate buraya koyabilirsin 

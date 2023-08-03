@@ -22,6 +22,21 @@ FlowRouter.route('/settings', {
   }
 });
 
+FlowRouter.route('/music', {
+  name: 'pages.music',
+  action: function (params, queryParams) {
+    this.render('publicLayouts', { page: 'pagesMusic' });
+  }
+});
+
+
+// FlowRouter.route('/addMusic', {
+//   name: 'modal.addMusic',
+//   action: function (params, queryParams) {
+//     this.render('publicLayouts', { page: 'pagesModalAddMusic' });
+//   }
+// });
+
 // FlowRouter.route('/signin', {
 //   name: 'auth.signin',
 //   action: function (params, queryParams) {

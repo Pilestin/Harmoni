@@ -1,0 +1,122 @@
+<template name="pagesHome">
+
+        <div class="pagesHome parent p-1">
+
+            <!-- MÜZİKLER -->
+            <div class="layoutAllMusics rounded-5 pb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="d-flex justify-content-around align-items-center">
+                            <h2>Musics</h2>
+                            <!-- <button>deneme</button> -->
+                        </div>
+                    </div>
+                </div>
+                
+
+                <hr>
+
+                <div class="container mt-3 mb-3">
+                    <form class="d-flex">
+                        <input type="text" class="form-control me-2" id="searchInput" placeholder="Müzik ara...">
+                        <button type="submit" class="btn btn-primary">Ara</button>
+                    </form>
+                </div>
+                <div class="container">
+                    <ul>
+                        {{#each allMusic}}
+                        <div class="row mb-1">
+                            <div class="col-8">
+                                <li>Name : {{name}} - ({{artist}}) Album : {{album}} </li>
+                                <!-- <li> {{name}}</li> -->
+                            </div>
+                            <div class="col-4">
+                                <!-- <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnPlayThisMusic"><i class="fa-solid fa-play"></i></button> -->
+                                <!-- <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnPauseThisMusic"><i class="fa-solid fa-pause"></i></button> -->
+                            </div>
+                        </div>
+                        
+                        {{/each}}
+                    </ul>
+
+
+                    <div class="row">
+                        {{#each allMusic}}
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="card btn rounded-5" data-id="{{fileId}}" id="btnPlayThisMusic"  style="width: 12rem; background-color:rgb(210, 230, 248)">
+                                <div class="card-body ">
+                                  <h5 class="card-title ">{{name}}</h5>
+                                  <h6 class="card-subtitle text-muted">{{artist}}</h6>
+                                  <p class="card-text text-muted">Category : {{category}}</p>
+                                    <p class="card-text text-muted">Album : {{album}}</p>
+                                  <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                              </div>       
+                        </div>
+                        {{/each}}
+                    </div>
+
+                </div>
+
+
+
+                <nav style="position: relative" class="d-flex justify-content-center m-3" aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                  </nav>
+
+
+            </div>
+
+            <!-- LİSTELERİM -->
+            <div class="layoutList rounded-5">
+                
+                <div class="container d-flex justify-content-center">
+                    <h2>My List</h2>
+                </div> 
+                <hr>
+                <ul>
+                    {{#each currentUser.favoriteMusic}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                
+            </div>
+
+            <!-- ARKADAŞLAR -->
+            <div class="layoutFriends  rounded-5">
+                  
+                <div class="container d-flex justify-content-center">
+                    <h2>Friends</h2>
+                </div> 
+                <hr>  
+                <ul>
+                {{#each currentUser.friendList}}
+                    <li>{{this}}</li>
+                {{/each}}
+                </ul>
+            </div>
+            <!-- API REQUEST -->
+            <div class="container">
+                <button type="button" class="btn btn-primary" id="getApi">API req</button>
+            </div>
+            <!-- MÜZİK EKLE -->
+            <div class="container">
+                <button type="button" class="btn btn-primary d-flex justify-content-center" id="btnShowModal"  >Müzik ekle</button>
+            </div>
+
+                
+            
+        </div>
+        <br>  
+        
+
+        
+        {{> pagesModalAddMusic}}
+
+</template>

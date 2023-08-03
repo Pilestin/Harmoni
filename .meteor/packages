@@ -36,3 +36,5 @@ alanning:roles              # Roller , admin or user gibi
 
 meteorhacks:ssr             # SSR render almak için
 aldeed:collection2          # Veritabanı yönetimi için 
+http
+ostrio:files

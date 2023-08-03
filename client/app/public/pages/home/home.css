@@ -1,0 +1,35 @@
+.pagesHome h3 span{
+    color : yellowgreen;
+    font-weight: 600;
+}
+
+.pagesHome {
+    background-color: rgb(77, 77, 73);
+}
+
+.searchBar{
+    background-color: gainsboro;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    }
+    
+.layoutAllMusics { 
+    grid-area: 1 / 2 / 4 / 6; 
+    background-color: yellowgreen;
+    
+ }
+.layoutList { 
+    grid-area: 1 / 1 / 2 / 2; 
+    background-color:crimson ;
+}
+.layoutFriends { 
+    grid-area: 2 / 1 / 4 / 2; 
+    background-color:aquamarine;
+}
+

@@ -8,17 +8,17 @@ Template.pagesLogin.events({
     const password = event.target.password.value
 
     Meteor.loginWithPassword(emailAddress, password, function (error) {
-    //   LoadingSection.hide(template, '.brd-loading-section')
+      //   LoadingSection.hide(template, '.brd-loading-section')
 
       if (error) {
         console.log(error);
         FlowRouter.go('/')
         return
       }
-      else {
-        console.log("user logged in : ", Meteor.user());
-        FlowRouter.go('pages.home')
-      }
+
+      console.log("user logged in : ", Meteor.user());
+      FlowRouter.go('pages.home')
+
     })
   },
 })

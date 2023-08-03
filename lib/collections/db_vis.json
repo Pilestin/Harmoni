@@ -1,0 +1,36 @@
+{
+    "User" : {
+      "_id" : "_??",
+      "firstName": "Yasin",
+      "lastName": "Ünal",
+      "email" : "yasin@test.com",
+      "password" : "123",
+      "favoriteList" : [
+        "_musicId"
+      ],
+      "currentPlay" : "musicId",
+      "friendList" : ["_userId"],
+      "createdAt" : "DATE",
+      "updatedAt" : "DATE"
+    },
+  
+    "Music" : {
+      "_id" : "_??", 
+      "name" : "",
+      "artist": "",
+      "album": "",
+      "category" : "categoryId",
+      "year" : "",
+      "language" : "",
+      "file" : "FILE",
+      "createdAt" : "DATE",
+      "updatedAt" : "DATE"
+    },
+  
+    "Categories" : {
+      "_id" : "_??",
+      "name" : "",
+      "description": ""
+    }
+  
+  }

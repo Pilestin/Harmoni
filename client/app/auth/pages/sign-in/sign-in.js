@@ -16,8 +16,13 @@ Template.pagesSignIn.events({
       lastName: lastName,
       email: emailAddress,
       password: password,
-      favoriteMusic: [""],
-      currentPlay: "",
+      profile : {
+        favoriteMusic : [""],
+        currentPlay : "",
+        friendList : [""],
+        createdAt : new Date(),
+        updatedAt : new Date(),
+      }
     }
     console.log("obj : ", obj);
 
@@ -29,16 +34,20 @@ Template.pagesSignIn.events({
         FlowRouter.go('/signin')
       }else{
         console.log("user created : ", result);
-        Meteor.call('user_.insert', obj,  function (error, result) {
-          if (error) {
-            console.log("error : ", error);
-          }else{
-            console.log("result : ", result);
-            FlowRouter.go('/home')
-          }
-        })
+        FlowRouter.go('/home')
+      //   Meteor.call('user_insert', obj,  function (error, result) {
+      //     if (error) {
+      //       console.log("error : ", error);
+      //     }else{
+      //       console.log("result : ", result);
+      //       FlowRouter.go('/home')
+      //     }
+      //   })
+      // }
       }
-    });
-    
+    })        
   },
 })
+
+
+

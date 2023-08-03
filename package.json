@@ -12,6 +12,7 @@
     "array-query": "^0.2.2",
     "jquery": "^3.6.0",
     "meteor-node-stubs": "^1.2.1",
+    "node-fetch": "^3.3.2",
     "notiflix": "^3.2.6",
     "simpl-schema": "^3.4.1",
     "sweetalert2": "^11.7.20"

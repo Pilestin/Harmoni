@@ -1,0 +1,58 @@
+<template name="pagesModalAddMusic">
+    <div class="div">
+        <div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="fileUploadModalLabel">Dosya Yükle</h5>
+                  <button id="btnCloseModal" type="button" class="close btn-danger" data-dismiss="modal" aria-label="Close">
+                    X
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAddMusic" >
+                        <div class="form-group">
+                            <label for="modalMusicName">Music Name</label>
+                            <input class="form-control"  type="text" name="musicName" id="modalMusicName">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMusicArtist">Music Artist</label>
+                            <input class="form-control"  type="text" name="musicArtist" id="modalMusicArtist" >
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMusicAlbum">Music Album</label>
+                            <input class="form-control"  type="text" name="musicAlbum" id="modalMusicAlbum" placeholder="albüm">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMusicCategory">Music Category</label>
+                            <input class="form-control"  type="text" name="musicCategory" id="modalMusicCategory" placeholder="Kategori">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMusicYear">Music Year</label>
+                            <input class="form-control"  type="text" name="musicYear" id="modalMusicYear" placeholder="yıl">
+                        </div>
+                        <div class="form-group">
+                            <label  for="modalMusicLanguage">Music Language</label>
+                            <input class="form-control"  type="text" name="musicLanguage" id="modalMusicLanguage" placeholder="dil">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modalMusicFile">Music File</label>
+                            <input class="form-control"  type="file" name="musicFile" id="modalMusicFile" placeholder="Choose File">
+                        </div>
+
+                        <button type="submit" class="btn btn-success d-flex justify-content-center mt-3"   >Submit</button>
+                      </form>
+
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                  <button type="button" class="btn btn-primary" id="uploadButton">Yükle</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+</template>
