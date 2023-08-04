@@ -16,13 +16,13 @@ Template.pagesSignIn.events({
       lastName: lastName,
       email: emailAddress,
       password: password,
-      profile : {
-        favoriteMusic : [""],
-        currentPlay : "",
-        friendList : [""],
-        createdAt : new Date(),
-        updatedAt : new Date(),
-      }
+      
+      favoriteMusic : [""],
+      currentPlay : "",
+      friendList : [""],
+      createdAt : new Date(),
+      updatedAt : new Date(),
+      
     }
     console.log("obj : ", obj);
 

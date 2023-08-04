@@ -1,0 +1,15 @@
+
+.componentsPlayer{
+    background-color: rgb(53, 66, 78);
+    position:fixed ;
+    bottom: 0px; 
+    height: 100px; 
+}
+
+.musicInfoCol1{
+    color: greenyellow;
+}
+
+.musicInfoCol2{
+    color: greenyellow;
+}

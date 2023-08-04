@@ -17,15 +17,12 @@ Template.pagesHome.onRendered(function () {
 
         if (self.subscribeUsers.ready()) {
           const user = Meteor.user();
-          console.log("user : ", user)
         }
         if (self.subscribeMusics.ready()) {
           const musics = Music.find().fetch();
-          console.log("musics : ", musics)
         }
         if (self.subscribeMusicFiles.ready()) {
             const musicFiles = MusicFiles.find().fetch();
-            console.log("musicFiles : ", musicFiles)
         }
       });
     });
@@ -34,7 +31,6 @@ Template.pagesHome.helpers({
     // Kullanıcı bilgilerini döndüren helper
     currentUser: function() {
         currentUser = Meteor.users.findOne({ _id: Meteor.userId() })
-        
         return  Meteor.user();
     },
     allUsers: function() {
@@ -47,6 +43,13 @@ Template.pagesHome.helpers({
         return Music.find({}).fetch();
         // return MusicFiles.find({}).fetch();
     },
+    isFavourite: function() {
+
+        const music = this;
+        const user = Meteor.user();
+        const isFavorite = user.favouriteMusic.includes(music._id);
+        return isFavorite;
+    }
 
 });
 Template.pagesHome.events({
@@ -65,12 +68,14 @@ Template.pagesHome.events({
     },
     // Bu fonksiyon müzik eklemek için gerekli olan Modal formunu açar
     'click #btnShowModal': function(event, template){
+        event.preventDefault()
         window.$('#fileUploadModal').modal('show');
     },
     // Bu fonksiyon müzik içerisindeki play butonuna tıklandığında çalışır
     // Müziği çalmak için gerekli olan URL'yi oluşturur ve Audio etiketine atar
-    'click #btnPlayThisMusic' : function(event, template){
-        
+    'click .btnPlayThisMusic' : function(event, template){
+
+
         const music = this;
         const musicFile = MusicFiles.findOne({ _id: music.fileId });
         
@@ -87,6 +92,15 @@ Template.pagesHome.events({
             audioElement.play(); // Müziği çalıyoruz
           })
           .catch(error => console.error('Error loading audio: ', error));
+
+
+        Meteor.call('user_currentPlay', music, function(err, res){
+            if(err){
+                console.log("err : ", err)
+            }
+            console.log("res : ", res)
+        })
+
         
         // const playButton = document.getElementById('playButton');
         // const pauseButton = document.getElementById('pauseButton');
@@ -100,7 +114,6 @@ Template.pagesHome.events({
         //   const audioElement = document.getElementById('audioPlayer');
         //   audioElement.pause(); // Müziği durdur
         // });
-
 
         //     // Dosya yolunu oluşturmak için _storagePath ve path değerlerini birleştir
         //     const musicPath = musicFile._storagePath + '/' + musicFile.path;
@@ -129,9 +142,31 @@ Template.pagesHome.events({
             
 
         });
-    }
+    },
+    'click #btnFavouriteMusic' : function(event, template){
+        const music = this; 
+        const user = Meteor.user();
 
-})
+        Meteor.call('user_favourite', music._id, function(err, res){
+            console.log("clinette user_favourite methodu çalıştı")
+            if(err){
+                console.log("err : ", err)
+            }
+            console.log("res : ", res)
+        })
+    },
+    'click #btnUnFavouriteMusic' : function(event, template){
+        const music = this;
+        const user = Meteor.user();
+
+        Meteor.call('user_unfavourite', music._id, function(err, res){
+            if(err){
+                console.log("err : ", err)
+            }
+            console.log("res : ", res)
+        })
+    },
+});
 
 Template.pagesHome.onDestroyed(function () {
     const self = this

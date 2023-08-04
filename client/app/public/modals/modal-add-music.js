@@ -8,7 +8,7 @@ Template.pagesModalAddMusic.events({
         event.preventDefault();
         console.log("Modal kapatıldı")
         $('#formAddMusic')[0].reset();
-        window.$('#fileUploadModal').modal('hide');
+        $('#fileUploadModal').modal('hide');
     },
 
 
@@ -28,7 +28,7 @@ Template.pagesModalAddMusic.events({
 
         if (!musicFile) {
           console.log('Not selected');
-          return
+          return;
         }
         
 
@@ -42,7 +42,7 @@ Template.pagesModalAddMusic.events({
           });
 
       
-          upload.on('end', function (error, result) {
+          upload.on('end', async function (error, result) {
             if (error) {
               console.log('Error uploading the file. Please try again.');
             } else {
@@ -59,41 +59,34 @@ Template.pagesModalAddMusic.events({
                 updatedAt: new Date()
               }; 
               console.log("Hazırladığım obje : ", obj)
-              Meteor.call('addMusic', obj, function (error, result) {
-                if (error) {
-                  console.log("error (73) : ", error);
-                  return error;
-                }
-                
-                  console.log("Music koleksiyonuna eklendi" , result);
-                  return result;
-                
-            });
-              $('#formAddMusic')[0].reset();
+              try {
+                const result = await new Promise((resolve, reject) => {
+                  Meteor.call('addMusic', obj, (error, result) => {
+                    if (error) {
+                      console.log("error: ", error);
+                      reject(error);
+                    } else {
+                      console.log("Music koleksiyonuna eklendi", result);
+                      resolve(result);
+                    }
+                  });
+                });
+                console.log("Result: ", result);
+                $('#formAddMusic')[0].reset();
+                $('#fileUploadModal').modal('hide');
+              } catch (error) {
+                console.log("Error:", error);
+              }
             }
-            
-          })
-          //upload.start();
-       }
-        catch(err){
-          console.log("catch err (86): ", err)
+          });
+       } catch(err) {
+          console.log("catch err (86): ", err);
       }
-
-        
-        window.$('#fileUploadModal').modal('hide');
-
-      }
+    }
 });
 
 Template.pagesModalAddMusic.onDestroyed(function() {
   // Şablon yok edildiğinde yapılacak işlemler burada yer alır
   console.log('Şablon yok edildi.');
 });
-
-
-// Template.pagesModalAddMusic.onDestroyed(function () {
-  
-//   window.$('#fileUploadModal').modal('hide');
-// }
-// );
 

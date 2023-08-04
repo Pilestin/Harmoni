@@ -29,6 +29,13 @@ FlowRouter.route('/music', {
   }
 });
 
+FlowRouter.route('/users', {
+  name: 'pages.users',
+  action: function (params, queryParams) {
+    this.render('publicLayouts', { page: 'pagesUsers' }); 
+  }
+});
+
 
 // FlowRouter.route('/addMusic', {
 //   name: 'modal.addMusic',

@@ -7,8 +7,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="d-flex justify-content-around align-items-center">
-                            <h2>Musics</h2>
-                            <!-- <button>deneme</button> -->
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-6 d-flex justify-content-center mt-2" >
+                                <h2>Musics</h2>
+                            </div>
+                            <div class="col-3 mt-3">
+                                {{#with currentUser}}   
+                                <span class="d-flex justify-content-end text-success h6 ">Now playing : <p class="text-success  text-truncate ">{{currentPlay.name}}</p></span>
+                                {{/with}}
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -23,34 +34,28 @@
                     </form>
                 </div>
                 <div class="container">
-                    <ul>
+                    <div class="row ">
                         {{#each allMusic}}
-                        <div class="row mb-1">
-                            <div class="col-8">
-                                <li>Name : {{name}} - ({{artist}}) Album : {{album}} </li>
-                                <!-- <li> {{name}}</li> -->
-                            </div>
-                            <div class="col-4">
-                                <!-- <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnPlayThisMusic"><i class="fa-solid fa-play"></i></button> -->
-                                <!-- <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnPauseThisMusic"><i class="fa-solid fa-pause"></i></button> -->
-                            </div>
-                        </div>
-                        
-                        {{/each}}
-                    </ul>
-
-
-                    <div class="row">
-                        {{#each allMusic}}
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="card btn rounded-5" data-id="{{fileId}}" id="btnPlayThisMusic"  style="width: 12rem; background-color:rgb(210, 230, 248)">
-                                <div class="card-body ">
-                                  <h5 class="card-title ">{{name}}</h5>
-                                  <h6 class="card-subtitle text-muted">{{artist}}</h6>
-                                  <p class="card-text text-muted">Category : {{category}}</p>
-                                    <p class="card-text text-muted">Album : {{album}}</p>
-                                  <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                            <div class="card rounded-5" data-id="{{fileId}}"   style="width: 100%; background-color:rgb(210, 230, 248)">
+                                <div class="card-body btn btnPlayThisMusic">
+                                    <img class="w-50" src="images/music-images.png"> 
+                                    <h5 class="card-title text-truncate ">{{name}}</h5>
+                                    <h6 class="card-subtitle text-truncate text-muted">{{artist}}</h6>
+                                    <p class="card-text text-truncate text-muted">Category : {{category}}</p>
+                                    <p class="card-text text-truncate text-muted">Album : {{album}}</p>
+                                    
                                 </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <button type="button" data-id="{{fileId}}" class="btn btn-primary me-3" id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
+                                    
+                                    {{#if isFavourite}}
+                                        <button type="button" data-id="{{fileId}}" class="btn btn-danger" id="btnUnFavouriteMusic"><i class="fa-solid fa-heart"></i></button>
+                                    {{else}}
+                                        <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnFavouriteMusic"><i class="fa-regular fa-heart"></i></button>
+                                    {{/if}} 
+                                </div>
+                                
                               </div>       
                         </div>
                         {{/each}}
@@ -58,7 +63,7 @@
 
                 </div>
 
-
+                
 
                 <nav style="position: relative" class="d-flex justify-content-center m-3" aria-label="Page navigation example">
                     <ul class="pagination">
@@ -74,16 +79,24 @@
             </div>
 
             <!-- LİSTELERİM -->
-            <div class="layoutList rounded-5">
+            <div class="layoutFavourites rounded-5">
                 
                 <div class="container d-flex justify-content-center">
                     <h2>My List</h2>
                 </div> 
                 <hr>
                 <ul>
-                    {{#each currentUser.favoriteMusic}}
-                    <li>{{this}}</li>
-                    {{/each}}
+                    {{#with currentUser}}
+                        {{#each  favouriteMusic}}
+                            <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
+                            <!-- let result=(glHelper favouriteMusic) -->
+                            <!-- -->
+                            {{#let music=(whichMusic this)}}
+                                <li>{{music.name}}</li>
+                            {{/let}}
+                            
+                        {{/each}}
+                    {{/with}}
                 </ul>
                 
             </div>
@@ -96,9 +109,14 @@
                 </div> 
                 <hr>  
                 <ul>
-                {{#each currentUser.friendList}}
-                    <li>{{this}}</li>
-                {{/each}}
+                {{#with currentUser}}
+                        {{#each  friendList}}
+                            <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
+                            <!-- let result=(glHelper favouriteMusic) -->
+                            <!-- -->
+                            <li>{{this}}</li>
+                        {{/each}}
+                    {{/with}}
                 </ul>
             </div>
             <!-- API REQUEST -->

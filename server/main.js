@@ -16,17 +16,18 @@ Meteor.startup(() => {
     readStream.pipe(res);
   });
 });
+
 Accounts.onCreateUser((obj, user) => {
   
   // user nesnesine ekstra özellikleri ekleyin
-  // user.firstName = obj.firstName;
-  // user.lastName = obj.lastName;
-  // user.email = obj.email;
-  // user.password = obj.password;
-  // user.favoriteMusic = [""];
-  // user.currentPlay = "";
-  // user.friendList = [""];
-  // user.createdAt = new Date();
+  user.firstName = obj.firstName;
+  user.lastName = obj.lastName;
+  user.email = obj.email;
+  user.password = obj.password;
+  user.favoriteMusic = [""];
+  user.currentPlay = "";
+  user.friendList = [""];
+  user.createdAt = new Date();
   // console.log("onCreateUser çalıştı")
   console.log("user server : ", user)
   // Düzenlenmiş kullanıcı nesnesini döndürün
@@ -38,29 +39,6 @@ Meteor.methods({'list_user' : function(){
   console.log("list_user methodu çalıştı");
   return User.find({}).fetch();
 }});
-
-
-
-
-
-async function getAccessToken() {
-  const url = 'https://accounts.spotify.com/api/token';
-  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-  const body = new URLSearchParams({ grant_type: 'client_credentials' });
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: body.toString(),
-  });
-
-  const data = await response.json();
-  return data.access_token;
-}
-
 
 
 Meteor.methods({
@@ -87,3 +65,21 @@ Meteor.methods({
   }
 })
 
+
+async function getAccessToken() {
+  const url = 'https://accounts.spotify.com/api/token';
+  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const body = new URLSearchParams({ grant_type: 'client_credentials' });
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: body.toString(),
+  });
+
+  const data = await response.json();
+  return data.access_token;
+}

@@ -24,7 +24,7 @@
     background-color: yellowgreen;
     
  }
-.layoutList { 
+.layoutFavourites { 
     grid-area: 1 / 1 / 2 / 2; 
     background-color:crimson ;
 }

@@ -4,12 +4,6 @@ import { Meteor } from 'meteor/meteor';
 const fs = require('fs');
 
 
-const musicFilesStore = new FilesCollection({
-    collectionName: 'musicFiles',
-    storagePath: 'assets/app/uploads'
-  });
-
-  
 Meteor.methods({
     "addMusic": function(obj, fileId) {
         // Yeni müzik belgesini oluşturup veritabanına ekleyin
