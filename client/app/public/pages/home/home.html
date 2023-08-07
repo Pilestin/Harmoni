@@ -3,6 +3,7 @@
         <div class="pagesHome parent p-1">
 
 
+
             <!-- MÜZİKLER -->
             <div class="layoutAllMusics rounded-5 pb-3">
                 <div class="container">
@@ -18,9 +19,7 @@
                                 {{#with currentUser}}   
                                 <span class="d-flex justify-content-end text-success h6 ">Now playing : <p class="text-success  text-truncate ">{{currentPlay.name}}</p></span>
                                 {{/with}}
-                            </div>
-                            
-                            
+                            </div>                          
                         </div>
                     </div>
                 </div>
@@ -50,7 +49,7 @@
                                 <div class="card-footer d-flex justify-content-center">
                                     <button type="button" data-id="{{fileId}}" class="btn btn-primary me-3" id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
                                     
-                                    {{#if isFavourite}}
+                                    {{#if isFavourite this}}
                                         <button type="button" data-id="{{fileId}}" class="btn btn-danger" id="btnUnFavouriteMusic"><i class="fa-solid fa-heart"></i></button>
                                     {{else}}
                                         <button type="button" data-id="{{fileId}}" class="btn btn-primary" id="btnFavouriteMusic"><i class="fa-regular fa-heart"></i></button>
@@ -83,7 +82,7 @@
             <div class="layoutFavourites rounded-5">
                 
                 <div class="container d-flex justify-content-center">
-                    <h2>My List</h2>
+                    <h2>Favourites</h2>
                 </div> 
                 <hr>
                 <ul>
@@ -92,9 +91,7 @@
                             <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
                             <!-- let result=(glHelper favouriteMusic) -->
                             <!-- -->
-                            {{#let music=(whichMusic this)}}
-                                <li>{{music.name}}</li>
-                            {{/let}}
+                                <li>{{name}}</li>
                             
                         {{/each}}
                     {{/with}}
@@ -115,7 +112,9 @@
                             <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
                             <!-- let result=(glHelper favouriteMusic) -->
                             <!-- -->
-                            <li>{{this}}</li>
+                            {{#let friend=(whoIs this._id)}}
+                                <li>{{friend.firstName}} {{friend.lastName}} {{friend.currentPlay.name}}</li>
+                            {{/let}}
                         {{/each}}
                     {{/with}}
                 </ul>

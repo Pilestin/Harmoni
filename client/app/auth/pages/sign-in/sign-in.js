@@ -17,9 +17,9 @@ Template.pagesSignIn.events({
       email: emailAddress,
       password: password,
       
-      favoriteMusic : [""],
+      favoriteMusic : [],
       currentPlay : "",
-      friendList : [""],
+      friendList : [],
       createdAt : new Date(),
       updatedAt : new Date(),
       

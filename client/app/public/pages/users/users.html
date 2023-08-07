@@ -1,8 +1,63 @@
 <template name="pagesUsers">
 
 
-    Burası kullanıcılar sayfası 
+    Burası kullanıcılar sayfası
 
     arkadaş ekleme için burası kullanılacak
+
+    <div class="pagesUsers container">
+
+        <!-- LİST TABLE-->
+
+        <div class="d-flex justify-content-center col-12">
+            <h2>Users</h2>
+
+        </div>
+        <br>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Surname</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Current Play</th>
+                  <th scope="col">Add Friend</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each allUsers}}
+                <tr>
+                  <th scope="row"></th>
+                  <td>{{firstName}}</td>
+                  <td>{{lastName}}</td>
+                  <td>{{email}}</td>
+                  <td>{{currentPlay}}</td>
+                  {{#if isFriend this}}
+                  <td><button type="button" class="btn btn-danger" id="btnUnFriend">Remove Friend</button></td>
+
+                  {{else}}
+                  <td><button type="button" class="btn btn-primary" id="btnAddFriend">Add Friend</button></td>
+
+                  {{/if}}
+
+                </tr>
+                {{/each}}
+              </tbody>
+        </table>
+
+        
+        
+    </div>
+
+
+    <ul>
+        {{#each myFriends}}
+        <li>{{_id}}</li>
+        {{/each}}
+    </ul>
+
+
 
 </template>

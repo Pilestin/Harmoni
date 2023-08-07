@@ -1,5 +1,5 @@
 Meteor.publish(
-    'list.musics', function() {
+    'music.list', function() {
         return Music.find({});
 });
 //         },

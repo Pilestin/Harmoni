@@ -4,7 +4,7 @@ import {Webapp} from 'meteor/webapp';
 Template.pagesHome.onCreated(function () {
 
     this.subscribeUsers = this.subscribe('users.list'); // Kullanıcıları abone ediyoruz
-    this.subscribeMusics = this.subscribe('list.musics'); // Müzikleri abone ediyoruz
+    this.subscribeMusics = this.subscribe('music.list'); // Müzikleri abone ediyoruz
     this.subscribeMusicFiles = this.subscribe('files.musics'); // Müzik dosyalarını abone ediyoruz
     
 });
@@ -15,17 +15,36 @@ Template.pagesHome.onRendered(function () {
 
     this.autorun(function () {
 
-        if (self.subscribeUsers.ready()) {
-          const user = Meteor.user();
-        }
-        if (self.subscribeMusics.ready()) {
-          const musics = Music.find().fetch();
-        }
+        
+       
         if (self.subscribeMusicFiles.ready()) {
             const musicFiles = MusicFiles.find().fetch();
         }
-      });
+        // eğer müzik silindiyse ve favoride tutuluyorsa onu da sil
+        // Bunun için subs. olduğumuz yapıları kullanabiliriz. 
+        // Eğer kullanıcının favori listesindeki müzik music içerisinde artık yoksa silinir.
+        if (self.subscribeUsers.ready() && self.subscribeMusics.ready()) {
+            const user = Meteor.user();
+            const musics = Music.find().fetch(); // Tüm müzikleri al
+            const favouriteMusic = user.favouriteMusic;
+
+            // Favori olarak işaretlenen müzikleri kontrol et
+            favouriteMusic.forEach((fav) => {
+                const isMusicExist = musics.find((music) => music._id === fav._id);
+                if (!isMusicExist) {
+                    // Müzik artık koleksiyonda yok, favorilerden çıkar
+                    Meteor.call('user_unfavourite', fav, function(err, res){
+                        if (err) {
+                            console.log("err : ", err);
+                        } else {
+                            console.log("Favori kaldırıldı: ", fav._id);
+                        }
+                    });
+                }
+            });
+        }
     });
+});
 
 Template.pagesHome.helpers({ 
     // Kullanıcı bilgilerini döndüren helper
@@ -39,17 +58,17 @@ Template.pagesHome.helpers({
 
     // Tüm müzikleri döndüren helper
     allMusic: function() {
-
         return Music.find({}).fetch();
         // return MusicFiles.find({}).fetch();
     },
-    isFavourite: function() {
-
-        const music = this;
+    isFavourite: function(music) {
         const user = Meteor.user();
-        const isFavorite = user.favouriteMusic.includes(music._id);
-        return isFavorite;
-    }
+        const favouriteMusic = user.favouriteMusic;
+        const isFavourite = favouriteMusic.find((favouriteMusic) => favouriteMusic._id === music._id);
+        return isFavourite ? true : false;
+        
+    },
+
 
 });
 Template.pagesHome.events({
@@ -75,11 +94,11 @@ Template.pagesHome.events({
     // Müziği çalmak için gerekli olan URL'yi oluşturur ve Audio etiketine atar
     'click .btnPlayThisMusic' : function(event, template){
 
-
+        event.preventDefault()
         const music = this;
         const musicFile = MusicFiles.findOne({ _id: music.fileId });
         
-        const musicUrl = 'http://localhost:3000/musics/' + musicFile._id  + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+        const musicUrl = 'http://192.168.31.67:3000/musics/' + musicFile._id  + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
         
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         
@@ -130,25 +149,33 @@ Template.pagesHome.events({
         //     console.log("Müzik dosyası bulunamadı.");
         // }
     },
-    'click #btnDeleteMusic' : function(event, template){
+    'click #btnDeleteMusic' : async  function(event, template){
+        event.preventDefault()
         const music = this;
 
-        Meteor.call('music.delete', music._id, music.fileId, function(err, res){
-
-            if(err){
-                console.log("err : ", err)
-            }
+        try{
+            const res = await new Promise((resolve, reject) => {
+                Meteor.call('music.delete', music, (err, res) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(res);
+                    }
+                });
+            });
+    
             console.log("silme işlemi tamamlandı: ", res);
-            
-
-        });
+        }
+        catch (err) {
+            console.log("err : ", err);
+        }
+       
     },
     'click #btnFavouriteMusic' : function(event, template){
+        event.preventDefault()
         const music = this; 
-        const user = Meteor.user();
 
-        Meteor.call('user_favourite', music._id, function(err, res){
-            console.log("clinette user_favourite methodu çalıştı")
+        Meteor.call('user_favourite', music, function(err, res){
             if(err){
                 console.log("err : ", err)
             }
@@ -156,10 +183,10 @@ Template.pagesHome.events({
         })
     },
     'click #btnUnFavouriteMusic' : function(event, template){
+        event.preventDefault()
         const music = this;
-        const user = Meteor.user();
 
-        Meteor.call('user_unfavourite', music._id, function(err, res){
+        Meteor.call('user_unfavourite', music, function(err, res){
             if(err){
                 console.log("err : ", err)
             }

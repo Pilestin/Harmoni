@@ -61,7 +61,7 @@ Template.pagesModalAddMusic.events({
               console.log("Hazırladığım obje : ", obj)
               try {
                 const result = await new Promise((resolve, reject) => {
-                  Meteor.call('addMusic', obj, (error, result) => {
+                  Meteor.call('music.add', obj, (error, result) => {
                     if (error) {
                       console.log("error: ", error);
                       reject(error);
@@ -80,13 +80,8 @@ Template.pagesModalAddMusic.events({
             }
           });
        } catch(err) {
-          console.log("catch err (86): ", err);
+          console.log("catch err Music add: ", err);
       }
     }
-});
-
-Template.pagesModalAddMusic.onDestroyed(function() {
-  // Şablon yok edildiğinde yapılacak işlemler burada yer alır
-  console.log('Şablon yok edildi.');
 });
 

@@ -1,8 +1,6 @@
-Meteor.publish('userById', function (id) {
-    return User.find({id}); 
-})
 
-Meteor.publish('users.list', function(argument) {
+
+Meteor.publish('users.list', function() {
     if (this.userId) {
         return Meteor.users.find({})
       } else {
