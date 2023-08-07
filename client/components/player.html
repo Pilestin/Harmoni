@@ -1,24 +1,23 @@
 <!-- MÜZİK PLAYER -->
 <template name="componentsPlayer">
     
-<div class="componentsPlayer container-fluid d-flex justify-content-center align-items-center">
+    <div class="componentsPlayer container-fluid d-flex justify-content-center align-items-center">
 
 
-    <div class="musicInfoCol1 col-sm-3 d-flex justify-content-center">
-        Burası şarkı bilgileri
+        <div class="musicInfoCol1 col-sm-3 d-flex justify-content-center">
+            Burası şarkı bilgileri
+        </div>
+        <div class="col-sm-6 d-flex justify-content-center">
+            <audio id="audioPlayer" class="w-100" controls >
+                <source  type="audio/ogg">
+                <source  type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="musicInfoCol2 col-sm-3 d-flex justify-content-center">
+            Burası şarkı bilgileri
+        </div>
+        
     </div>
-    <div class="col-sm-6 d-flex justify-content-center">
-        <audio id="audioPlayer" class="w-100" controls >
-            <source  type="audio/ogg">
-            <source  type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-    </div>
-    <div class="musicInfoCol2 col-sm-3 d-flex justify-content-center">
-        Burası şarkı bilgileri
-    </div>
-    
-</div>
-
 
 </template> 

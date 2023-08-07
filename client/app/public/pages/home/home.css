@@ -17,7 +17,7 @@
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 5px;
     grid-row-gap: 5px;
-    }
+}
     
 .layoutAllMusics { 
     grid-area: 1 / 2 / 4 / 6; 
@@ -26,10 +26,10 @@
  }
 .layoutFavourites { 
     grid-area: 1 / 1 / 2 / 2; 
-    background-color:crimson ;
+    background-color:rgb(255, 227, 232) ;
 }
 .layoutFriends { 
     grid-area: 2 / 1 / 4 / 2; 
-    background-color:aquamarine;
+    background-color:rgb(217, 247, 237);
 }
 

@@ -22,12 +22,7 @@ FlowRouter.route('/settings', {
   }
 });
 
-FlowRouter.route('/music', {
-  name: 'pages.music',
-  action: function (params, queryParams) {
-    this.render('publicLayouts', { page: 'pagesMusic' });
-  }
-});
+
 
 FlowRouter.route('/users', {
   name: 'pages.users',
