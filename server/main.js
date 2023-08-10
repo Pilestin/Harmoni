@@ -24,10 +24,11 @@ Accounts.onCreateUser((obj, user) => {
   user.lastName = obj.lastName;
   user.email = obj.email;
   user.password = obj.password;
-  user.favoriteMusic = [""];
+  user.favoriteMusic = [];
   user.currentPlay = "";
-  user.friendList = [""];
+  user.friendList = [];
   user.createdAt = new Date();
+  user.profilePhoto = obj.profilePhoto;
   // console.log("onCreateUser çalıştı")
   console.log("user server : ", user)
   // Düzenlenmiş kullanıcı nesnesini döndürün

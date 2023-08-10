@@ -1,3 +1,5 @@
+import {FlowRouter}  from 'meteor/ostrio:flow-router-extra'
+
 Template.pagesUsers.onCreated(function () {
 
     const self = this
@@ -34,9 +36,8 @@ Template.pagesUsers.helpers({
         return users;
     },
     myFriends: function() {
-        const user = Meteor.user();
-        const friends = user.friendList;
-        console.log("friends : ", friends);
+        const me = Meteor.user();
+        const friends = me.friendList;
         return friends;
     },
     isFriend: function(user) {
@@ -100,5 +101,9 @@ Template.pagesUsers.events({
                 console.log("Arkadaş silindi: ", user._id);
             }
         }
-        )}
+    )},
+    'click #btnTurnHome' : function(event, template){
+        FlowRouter.go('pages.home');
+    }
+
 });

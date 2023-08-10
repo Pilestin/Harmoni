@@ -10,16 +10,17 @@ Template.pagesSignIn.events({
     const emailAddress = event.target.emailAddress.value
     const password = event.target.password.value
     // const passwordAgain = event.target.passwordAgain.value
+    const profilePhoto = event.target.profilePhotoUrl.value
 
     const obj = {
       firstName: firstName,
       lastName: lastName,
       email: emailAddress,
       password: password,
-      
       favoriteMusic : [],
       currentPlay : "",
       friendList : [],
+      profilePhoto : profilePhoto,
       createdAt : new Date(),
       updatedAt : new Date(),
       

@@ -2,9 +2,12 @@
     color : yellowgreen;
     font-weight: 600;
 }
+.panelLeft {
+    background-color:rgb(39, 39, 36);
+}
 
 .pagesHome {
-    background-color: rgb(77, 77, 73);
+    background-color: rgb(39, 39, 36);
 }
 
 .searchBar{
@@ -19,17 +22,50 @@
     grid-row-gap: 5px;
 }
     
-.layoutAllMusics { 
-    grid-area: 1 / 2 / 4 / 6; 
-    background-color: yellowgreen;
-    
- }
-.layoutFavourites { 
-    grid-area: 1 / 1 / 2 / 2; 
-    background-color:rgb(255, 227, 232) ;
-}
-.layoutFriends { 
-    grid-area: 2 / 1 / 4 / 2; 
-    background-color:rgb(217, 247, 237);
-}
 
+
+.user-info-container {
+    width: 300px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  #scrollingText {
+    color: burlywood;
+    position: absolute;
+    white-space: nowrap;
+    animation: scrolling 12s linear infinite;
+  }
+  #scrollingText:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scrolling {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+
+
+
+  #nowPlaying{
+    color: rgb(204, 31, 31);
+  }
+
+ #friendsMusicsArtist{
+    color: burlywood
+ }
+
+ #friendsName{
+    color: rgb(57, 200, 200);
+    font-weight: 600;
+ }
+
+ table {
+  background-color: rgb(39, 39, 36);
+ }

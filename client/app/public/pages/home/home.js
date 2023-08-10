@@ -1,5 +1,5 @@
 import {Webapp} from 'meteor/webapp';
-
+import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 
 Template.pagesHome.onCreated(function () {
 
@@ -71,6 +71,34 @@ Template.pagesHome.helpers({
 
 
 });
+
+const playMusic = function(music) {
+    const musicFile = MusicFiles.findOne({ _id: music.fileId });
+
+    const musicUrl = 'http://localhost:3000/musics/' + musicFile._id  + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    fetch(musicUrl)
+      .then(response => response.arrayBuffer())
+      .then(buffer => audioContext.decodeAudioData(buffer))
+      .then(decodedData => {
+        const audioElement = document.getElementById('audioPlayer');
+        audioElement.src = musicUrl; // Audio etiketine URL'yi atıyoruz
+        audioElement.play(); // Müziği çalıyoruz
+      })
+      .catch(error => console.error('Error loading audio: ', error));
+
+
+    Meteor.call('user_currentPlay', music, function(err, res){
+        if(err){
+            console.log("err : ", err)
+        }
+        console.log("res : ", res)
+    });
+}
+
+
 Template.pagesHome.events({
     // Bu fonksiyon, SPOTİFY API'ye istek atarak müzik verilerini alır
     'click #getApi': async function(event, template){
@@ -90,64 +118,40 @@ Template.pagesHome.events({
         event.preventDefault()
         window.$('#fileUploadModal').modal('show');
     },
+    'click .brd-sign-out': function (event, template) {
+        Meteor.logout(function (error) {
+          if (error) {
+            // todo error handling
+            return
+          }
+    
+          FlowRouter.go('/home')
+        })
+      },
+      'click .brd-profile': function (event, template) {
+        FlowRouter.go('/myprofile')
+      },
+      'click .brd-settings': function (event, template) {
+        FlowRouter.go('/settings')
+      },
     // Bu fonksiyon müzik içerisindeki play butonuna tıklandığında çalışır
     // Müziği çalmak için gerekli olan URL'yi oluşturur ve Audio etiketine atar
     'click .btnPlayThisMusic' : function(event, template){
 
         event.preventDefault()
         const music = this;
-        const musicFile = MusicFiles.findOne({ _id: music.fileId });
-        
-        const musicUrl = 'http://192.168.31.67:3000/musics/' + musicFile._id  + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
-        
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        fetch(musicUrl)
-          .then(response => response.arrayBuffer())
-          .then(buffer => audioContext.decodeAudioData(buffer))
-          .then(decodedData => {
-            const audioElement = document.getElementById('audioPlayer');
-            audioElement.src = musicUrl; // Audio etiketine URL'yi atıyoruz
-            audioElement.play(); // Müziği çalıyoruz
-          })
-          .catch(error => console.error('Error loading audio: ', error));
+
+        const playerTitle = document.getElementById('playerTitle');
+        const playerArtist = document.getElementById('playerArtist');
+        const playerImage = document.getElementById('playerImage');
+
+        playerTitle.innerHTML = music.name;
+        playerArtist.innerHTML = music.artist;
+        // playerImage.src = music.image;
 
 
-        Meteor.call('user_currentPlay', music, function(err, res){
-            if(err){
-                console.log("err : ", err)
-            }
-            console.log("res : ", res)
-        })
 
-        
-        // const playButton = document.getElementById('playButton');
-        // const pauseButton = document.getElementById('pauseButton');
-        
-        // playButton.addEventListener('click', () => {
-        //   const audioElement = document.getElementById('audioPlayer');
-        //   audioElement.play(); // Müziği çal
-        // });
-        
-        // pauseButton.addEventListener('click', () => {
-        //   const audioElement = document.getElementById('audioPlayer');
-        //   audioElement.pause(); // Müziği durdur
-        // });
-
-        //     // Dosya yolunu oluşturmak için _storagePath ve path değerlerini birleştir
-        //     const musicPath = musicFile._storagePath + '/' + musicFile.path;
-
-        //     // Oluşturulan dosya yolunu kullanarak URL oluştur
-        //     const musicUrl = '/' + musicPath;
-
-        //     const audioElement = document.getElementById('audioPlayer');
-        //     audioElement.src = musicUrl;
-        //     audioElement.play();
-            
-        // }
-        // else {
-        //     console.log("Müzik dosyası bulunamadı.");
-        // }
+        playMusic(music);
     },
     'click #btnDeleteMusic' : async  function(event, template){
         event.preventDefault()
@@ -193,6 +197,15 @@ Template.pagesHome.events({
             console.log("res : ", res)
         })
     },
+    'click .btnPlayFriendsMusic' : function(event, template){
+        event.preventDefault()
+
+        const friendId = this._id;
+        const friend = Meteor.users.findOne({ _id: friendId});
+        const music = friend.currentPlay;
+        
+        playMusic(music);
+    }
 });
 
 Template.pagesHome.onDestroyed(function () {

@@ -1,79 +1,43 @@
 <template name="componentsNavbar">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-dark ">
-    <div class="container">
-      <div class="col-2">
-        <div class="row">
-          <div class="col-1">
-            <i class="pt-3 fa-solid fa-compact-disc text-white "></i>
-          </div>
-          <div class="col-10 mt-1">
-            <h2><a style="text-decoration: none"  href="/home">Harmoni</a></h2>
+  <nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid d-flex justify-content-around">
+  
+        <div class="navbarPageBackDiv col-lg-2 col-md-4 col-sm-12 d-flex justify-content-between">
+          <div class="container ">
+            <button type="button" class="btn btn-outline-light rounded-5 me-3"><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" class="btn btn-outline-light rounded-5"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
-      </div>
-      <div class="col-10">
-        <div class="row">
-          <div class="col-8 pt-2">
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-1">
-                <li class="nav-item"><a class="nav-link text-white" href="{{pathFor 'pages.home'}}">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="{{pathFor 'pages.users'}}">Users</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="{{pathFor 'pages.home'}}">Home</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-4 ps-3">
-
-            <div class="row">
-
-            <div class="col-md pt-2">
-              <h3><span class="greenColor">{{currentUser.firstName}} {{currentUser.lastName}}</span></h3>
+  
+        <div class="navbarSearchBarDiv col-lg-6 col-md-4 col-sm-12">
+          <form class="d-flex">
+            <input type="text" class="form-control me-2 rounded-5" id="searchInput" placeholder="Müzik ara..." style="width: 300px;" >
+            <button type="submit" class="btn rounded-5 btnMusicSearch">Ara</button>
+          </form>
+        </div>
+  
+        <div class="navbarLogoDiv col-lg-4 col-md-4 col-sm-12 pe-3 d-flex justify-content-end ">
+          <div class="row ">
+            <div class="col mt-2 ">
+              <i class="fa-solid fa-compact-disc text-success me-2"></i>
 
             </div>
+            <div class="col">
+              <h2 class="m-0"><a href="/home" class="text-decoration-none">Harmoni</a></h2>
 
-            <div class="col-md pt-2">
-              {{#if currentUser}}
-
-            
-              <div class="dropdown">
-                
-                <button type="button" class="btn btn-info dropdown-toggle navbar-toggle" data-bs-toggle="dropdown">
-                  <i class="fa-solid fa-bars"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <button class="dropdown-item btn me-2 brd-profile">
-                      <i class="fa-solid fa-user"></i> Profile
-                    </button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item btn brd-settings">
-                      <i class="fa-solid fa-gear"></i> Settings
-                    </button>
-                  </li>
-                  <li><a class=" btn dropdown-item" href="/user"><i class="fa-solid fa-user"></i> Users</a></li>
-                  <li>
-                    <button class="dropdown-item btn me-2 brd-sign-out">
-                      <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                    </button>
-                  </li>
-                </ul>
-              </div>
-              {{else}}
-              <a href="/login" class="btn btn-success">Login / Sign In</a>
-              {{/if}}
             </div>
-           
           </div>
         </div>
-        </div>
-
-
-        </div>
+  
       </div>
 
+  
   </nav>
+  
+
+
 
 </template>

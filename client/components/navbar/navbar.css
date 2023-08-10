@@ -18,3 +18,14 @@ nav h2 a{
 .greenColor{
     color: yellowgreen;
 }
+
+.navbar {
+    background-color: rgb(39, 39, 36);
+}
+.friendCard{
+    background-color: rgb(39, 39, 36);
+}
+.btnMusicSearch{
+    background-color: rgb(95, 90, 90);
+    color: white;
+}

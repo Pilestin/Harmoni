@@ -1,21 +1,32 @@
 <template name="pagesUsers">
 
 
-    Burası kullanıcılar sayfası
+  Şimdilik üstteki geri ve ileri butonlarımız çalışmıyor.  
+  O yüzden şu alttaki ile ana sayfaya gidebilirsin :D  
 
-    arkadaş ekleme için burası kullanılacak
+  <br>
+  <br>
+
+
+  <button class="btn btn-primary ms-3" type="button" id="btnTurnHome"> Home</button>
+
+  <br>
+  <br>
 
     <div class="pagesUsers container">
 
         <!-- LİST TABLE-->
 
-        <div class="d-flex justify-content-center col-12">
+        <div class="d-flex justify-content-center col-12 ">
             <h2>Users</h2>
 
         </div>
         <br>
         <hr>
-        <table class="table">
+
+
+        
+        <table class="table table-bordered">
             <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -29,13 +40,13 @@
               <tbody>
                 {{#each allUsers}}
                 <tr>
-                  <th scope="row"></th>
+                  <th scope="row"><img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50" ></th>
                   <td>{{firstName}}</td>
                   <td>{{lastName}}</td>
                   <td>{{email}}</td>
-                  <td>{{currentPlay}}</td>
+                  <td>{{currentPlay.name}}</td>
                   {{#if isFriend this}}
-                  <td><button type="button" class="btn btn-danger" id="btnUnFriend">Remove Friend</button></td>
+                  <td><button type="button" class="btn btn-danger " id="btnUnFriend">Remove</button></td>
 
                   {{else}}
                   <td><button type="button" class="btn btn-primary" id="btnAddFriend">Add Friend</button></td>
@@ -50,13 +61,19 @@
         
         
     </div>
-
-
-    <ul>
+    <div class="container bg-light rounded-5">
+      <h6>Your friends</h6>
+      <br>
+      <ul>
         {{#each myFriends}}
-        <li>{{_id}}</li>
+          {{#with friend= (whoIs this._id)}}
+            <li>{{friend.firstName}} {{friend.lastName}}</li>
+          {{/with}}
         {{/each}}
     </ul>
+    </div>
+    
+    
 
 
 

@@ -5,19 +5,45 @@
 
 
         <div class="musicInfoCol1 col-sm-3 d-flex justify-content-center">
-            Burası şarkı bilgileri
+            
+            <div class="song-bar">
+                <div class="song-infos">
+                    <div class="image-container">
+                        <img id="playerImage" src="https://i.ytimg.com/vi/c0r2ZIAFg4Y/maxresdefault.jpg" alt="" />
+                    </div>
+                    <div class="song-description">
+                        <p class="title" id="playerTitle"></p>
+                        <p class="artist" id="playerArtist"></p>
+                    </div>
+                </div>
+                <div class="icons">
+                    <i class="far fa-heart"></i>
+                    <i class="fas fa-compress"></i>
+                </div>
+            </div>
+
+
         </div>
         <div class="col-sm-6 d-flex justify-content-center">
-            <audio id="audioPlayer" class="w-100" controls >
-                <source  type="audio/ogg">
-                <source  type="audio/mpeg">
+            <audio id="audioPlayer"  controls  >
+                <source id=""  type="audio/mpeg">
             Your browser does not support the audio element.
             </audio>
         </div>
         <div class="musicInfoCol2 col-sm-3 d-flex justify-content-center">
-            Burası şarkı bilgileri
+            <div class="other-features">
+                <i class="fas fa-list-ul"></i>
+                <i class="fas fa-desktop"></i>
+                <div class="volume-bar">
+                    <i class="fas fa-volume-down"></i>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </div>
+
 
 </template> 
