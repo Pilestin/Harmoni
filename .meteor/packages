@@ -39,3 +39,5 @@ aldeed:collection2          # Veritabanı yönetimi için
 http
 ostrio:files
 session
+percolate:migrations
+mizzao:user-status

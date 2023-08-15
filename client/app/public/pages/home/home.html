@@ -1,277 +1,325 @@
 <template name="pagesHome">
 
+  <div class="pagesHome container-fluid ">
+
+    <div class="row">
+
+      <!-- LEFT PANEL -->
+      <div class="panelLeft col-3">
+
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="min-height: 100%">
 
 
+          <!-- MEEEEEEEEEEEEEEEEEEE -->
+          <div class="dropdown">
+            {{#with currentUser}}
+              <a href="#" class="d-flex ms-3 align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{profilePhoto}}" alt="" width="64" height="64" class="rounded-circle me-2">
+                <strong class="ms-3 h3 text-info"> {{firstName}} {{lastName}}</strong>
+              </a>
+            {{/with}}
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><button class="dropdown-item btn me-2 brd-profile">
+                  <i class="fa-solid fa-user"></i> Profile
+                </button></li>
+              <li><button class="dropdown-item btn brd-settings">
+                  <i class="fa-solid fa-gear"></i> Settings
+                </button></li>
+              <li>
+                <hr class="dropdown-divider bg-white">
+              </li>
+              <li>
+                <button class="dropdown-item btn me-2 brd-sign-out">
+                  <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                </button>
+              </li>
+            </ul>
+          </div>
 
-    <div class="pagesHome container-fluid ">
+          <hr>
+          <!-- LEFT MENUUUUUUUU  -->
+          <div class="col">
+            <ul class="nav nav-pills flex-column ">
 
-        <div class="row">
+              <li class="sidebar-items rounded-4  m-1">
+                <button id="btnMenuMusic" class="nav-link text-white">
+                  <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#table"></use>
+                  </svg>
+                  <i class="fa-solid fa-music pe-3"></i>
+                  Musics
+                </button>
+              </li>
+              <li class="sidebar-items rounded-4  m-1">
+                <button id="btnMenuCategory" class="nav-link text-white">
+                  <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#grid"></use>
+                  </svg>
+                  <i class="fa-solid fa-table-list pe-3"></i>
+                  Categories
+                </button>
+              </li>
+              <li class="sidebar-items rounded-4 m-1">
+                <a href="/users" class="nav-link text-white">
+                  <svg class="bi me-2" width="16" height="16">
+                    <use xlink:href="#people-circle"></use>
+                  </svg>
+                  <i class="fa-solid fa-earth-americas pe-3"></i>
+                  Other Users
+                </a>
+              </li>
+              <li class="sidebar-items rounded-4 m-1">
+                <button id="btnShowModal" type="button" class="nav-link text-white">
+                  <svg class="bi me-2" width="16" height="16">
 
-            <!-- LEFT PANEL -->
-            <div class="panelLeft col-3" >
+                  </svg>
+                  <i class="fa-solid fa-plus pe-3"></i>
+                  Add Music
+                </button>
+              </li>
 
-                <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="min-height: 100%">
+            </ul>
+          </div>
 
+          <br>
 
-                    <!-- MEEEEEEEEEEEEEEEEEEE -->
-                    <div class="dropdown">
-                        {{#with currentUser}}
-                        <a href="#"
-                            class="d-flex ms-3 align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{profilePhoto}}" alt="" width="64" height="64" class="rounded-circle me-2">
-                            <strong class="ms-3 h3 text-info"> {{firstName}} {{lastName}}</strong>
-                        </a>
-                        {{/with}}
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><button class="dropdown-item btn me-2 brd-profile">
-                                    <i class="fa-solid fa-user"></i> Profile
-                                </button></li>
-                            <li><button class="dropdown-item btn brd-settings">
-                                    <i class="fa-solid fa-gear"></i> Settings
-                                </button></li>
-                            <li>
-                                <hr class="dropdown-divider bg-white">
-                            </li>
-                            <li>
-                                <button class="dropdown-item btn me-2 brd-sign-out">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+          <!-- NOW PLAYİNGGGGGGGGGGGG -->
+          <div class="container text-white">
 
-                    <hr>
-                    <!-- LEFT MENUUUUUUUU  -->
-                    <div class="col">
-                        <ul class="nav nav-pills flex-column ">
-
-                            <li class="sidebar-items rounded-4  m-1">
-                                <a href="/home" class="nav-link text-white">
-                                    <svg class="bi me-2" width="16" height="16">
-                                        <use xlink:href="#table"></use>
-                                    </svg>
-                                    <i class="fa-solid fa-music pe-3"></i>
-                                    Musics
-                                </a>
-                            </li>
-                            <li class="sidebar-items rounded-4  m-1">
-                                <a href="/home" class="nav-link text-white">
-                                    <svg class="bi me-2" width="16" height="16">
-                                        <use xlink:href="#grid"></use>
-                                    </svg>
-                                    <i class="fa-solid fa-table-list pe-3"></i>
-                                    Categories
-                                </a>
-                            </li>
-                            <li class="sidebar-items rounded-4 m-1">
-                                <a href="/users" class="nav-link text-white">
-                                    <svg class="bi me-2" width="16" height="16">
-                                        <use xlink:href="#people-circle"></use>
-                                    </svg>
-                                    <i class="fa-solid fa-earth-americas pe-3"></i>
-                                    Other Users
-                                </a>
-                            </li>
-                            <li class="sidebar-items rounded-4 m-1">
-                                <button id="btnShowModal" type="button"  class="nav-link text-white">
-                                    <svg class="bi me-2" width="16" height="16">
-                                        
-                                    </svg>
-                                    <i class="fa-solid fa-plus pe-3"></i>
-                                    Add Music
-                                </button>
-                            </li>
-                        
-                        </ul>
-                    </div>
-
-                    <br>
-
-                    <!-- NOW PLAYİNGGGGGGGGGGGG -->
-                    <div class="container text-white">
-
-                        <hr>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <span id="nowPlaying">Now Playing </span>
-                        </div>
-                        <hr>
-                        <div class="container-fluid  user-info-container">
-                            {{#with currentUser}}
-                            <p id="scrollingText">{{currentPlay.name}}</p>
-                            {{/with}}
-                        </div>
-                    </div>
-
-
-                    <br>
-
-
-
-                    <!-- FAVOURİTESSSSSSSSSSSSSS -->
-                    <div class="layoutFavourites rounded-5">
-
-                        <div class="container d-flex justify-content-center">
-                            <h2>Favourites</h2>
-                        </div>
-                        <hr>
-
-                        {{#with currentUser}}
-                        {{#each favouriteMusic}}
-                        <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
-                        <!-- let result=(glHelper favouriteMusic) -->
-                        <!-- -->
-                        <a class="btn btnPlayThisMusic text-white-50" data-id="{{fileId}}">
-                            <i class="fa-solid fa-heart text-danger"></i>
-                            {{name}}</a>
-
-                        {{/each}}
-                        {{/with}}
-
-                    </div>
-
-                    <br>
-                    <br>
-
-                    <!-- FRİENDSSSSSSSSSSSSSS -->
-                    <div class="layoutFriends  rounded-5">
-
-                        <div class="container d-flex justify-content-center">
-                            <h2>Friends</h2>
-                        </div>
-                        <hr>
-                        {{#with currentUser}}
-                        {{#each friendList}}
-                        <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
-                        <!-- let result=(glHelper favouriteMusic) -->
-                        <!-- -->
-                        {{#let friend=(whoIs this._id)}}
-                        <div class="list-group rounded-4 mb-2">
-                            <a class="friendCard list-group-item flex-column bg-dark btnPlayFriendsMusic">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <img src="{{friend.profilePhoto}}" alt="" class="rounded-circle " width="32" height="32">
-                                    <h6 id="friendsName">{{friend.firstName}} {{friend.lastName}} </h6>
-                                    <small class="text-secondary">3 days ago</small>
-                                </div>
-                                <span id="friendsMusicsArtist">{{friend.currentPlay.artist}}</span>
-                                <p id="friendsMusicsName" class="mb-1 text-truncate">{{friend.currentPlay.name}}</p>
-                            </a>
-                        </div>
-                        {{/let}}
-                        {{/each}}
-                        {{/with}}
-
-                    </div>
-
-                </div>
-
+            <hr>
+            <div class="d-flex justify-content-center align-items-center">
+              <span id="nowPlaying">Now Playing </span>
             </div>
-            
-            <!-- RIGHT PANEL -->
-            <div class="panelRight col-9">
-                <div class="layoutAllMusics rounded-2 pb-3">
-                    <div class="container">
-                        <div class="row">
-                            <div class="d-flex justify-content-around align-items-center">
-                                <h2 class="text-white">Musics</h2>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="container mt-5">
-
-                        <!-- <table class="table custom-table">
-                                
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Başlık</th>
-                                  <th scope="col">Albüm</th>
-                                  <th scope="col">Sanatçı</th>
-                                </tr>
-                              </thead>
-                              {{#each allMusic}}
-                              <tbody>
-                                <tr> 
-                                  <td></td>
-                                  <td>{{name}}</td>
-                                  <td>Albüm 1</td>
-                                    <td>Şarkı Süresi 1</td>
-                                </tr> -->
-                        <!-- Diğer şarkılar için benzer satırlar ekleyebilirsiniz -->
-                        <!-- </tbody>
-                                {{/each}}
-                            </table> -->
-
-
-                        <div class="row ">
-                            {{#each allMusic}}
-                            <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-                                <div class="card rounded-4" 
-                                    style="width: 11rem; background-color:rgb(177, 195, 210)">
-                                    <div class="card-body btn btnPlayThisMusic">
-                                        <img class="w-50" src="images/music-images.png">
-                                        <p class="card-title text-truncate ">{{name}}</p>
-                                        <p class="card-subtitle text-truncate text-muted">{{artist}}</p>
-                                    </div>
-                                    <div class="card-footer d-flex justify-content-center">
-                                        <button type="button" data-id="{{fileId}}" class="btn btn-dark text-white me-3"
-                                            id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
-
-                                        {{#if isFavourite this}}
-                                        <button type="button" data-id="{{fileId}}" class="btn btn-danger text-black-50"
-                                            id="btnUnFavouriteMusic"><i class="fa-solid fa-heart"></i></button>
-                                        {{else}}
-                                        <button type="button" data-id="{{fileId}}" class="btn btn-dark text-white"
-                                            id="btnFavouriteMusic"><i class="fa-regular fa-heart "></i></button>
-                                        {{/if}}
-                                    </div>
-
-                                </div>
-                            </div>
-                            {{/each}}
-                        </div>
-
-                    </div>
-
-
-
-                    <nav style="position: relative" class="d-flex justify-content-center m-3"
-                        aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                        
-                    </nav>
-
-                    <div class="d-flex justify-content-end ">
-                        <button type="button" class="btn btn-danger" id="getApi">API request</button>
-                    </div>
-
-
-                </div>
-
+            <hr>
+            <div class="container-fluid  user-info-container">
+              {{#with currentUser}}
+                <p id="scrollingText">{{currentPlay.name}}</p>
+              {{/with}}
             </div>
+          </div>
+
+
+          <br>
+
+
+
+          <!-- FAVOURİTESSSSSSSSSSSSSS -->
+          <div class="layoutFavourites rounded-5">
+
+            <div class="container d-flex justify-content-center">
+              <h2>Favourites</h2>
+            </div>
+            <hr>
+
+            {{#with currentUser}}
+              {{#each favouriteMusic}}
+                <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
+                <!-- let result=(glHelper favouriteMusic) -->
+                <!-- -->
+                <ul>
+                  <li><a class="btn btnPlayThisMusic text-white-50" data-id="{{fileId}}">
+                      <i class="fa-solid fa-heart text-danger"></i>
+                      {{name}}</a></li>
+                </ul>
+
+
+              {{/each}}
+            {{/with}}
+
+          </div>
+
+          <br>
+          <br>
+
+          <!-- FRİENDSSSSSSSSSSSSSS -->
+          <div class="layoutFriends  rounded-5">
+
+            <div class="container d-flex justify-content-center">
+              <h2>Follows</h2>
+            </div>
+            <hr>
+            {{#with currentUser}}
+              {{#each friendList}}
+                <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
+                <!-- let result=(glHelper favouriteMusic) -->
+                <!-- -->
+                {{#let friend=(whoIs this._id)}}
+                  <div class="list-group rounded-4 mb-2">
+                    <a class="friendCard list-group-item flex-column bg-dark btnPlayFriendsMusic">
+                      <div class="d-flex w-100 justify-content-between">
+                        <img src="{{friend.profilePhoto}}" alt="" class="rounded-circle " width="32" height="32">
+                        <h6 id="friendsName">{{friend.firstName}} {{friend.lastName}} </h6>
+                        {{#if friend.status.online}}
+                        <small class="text-secondary"><i class="fa-solid fa-circle fa-fade" style="color: #4bff1a;"></i></small>
+                        {{else}}
+                        <small class="text-secondary"><i class="fa-solid fa-circle" style="color: #ff1a1a;"></i></small>
+                        {{/if}}
+
+                      </div>
+                      <span id="friendsMusicsArtist">{{friend.currentPlay.artist}}</span>
+                      <p id="friendsMusicsName" class="mb-1 text-truncate">{{friend.currentPlay.name}}</p>
+                    </a>
+                  </div>
+                {{/let}}
+              {{/each}}
+            {{/with}}
+
+          </div>
 
         </div>
 
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="panelRight col-9 ps-3 pe-3">
+
+        {{#if categoryFlag}}
+          <div class="layoutCategory rounded-2 pb-3 mt-3">
+            <div class="container text-white mt-3">
+              <div class="row">
+                <div class="d-flex justify-content-around align-items-center">
+                  <h2 class="text-white">Categories</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="container mt-5">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="category-card" onclick="window.location.href='#'">
+                      <img src="kategori1.jpg" alt="Pop Müzik">
+                      <div class="card-body">
+                        <h5 class="card-title">Pop Müzik</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="category-card" onclick="window.location.href='#'">
+                      <img src="kategori2.jpg" alt="Rock Müzik">
+                      <div class="card-body">
+                        <h5 class="card-title">Rock Müzik</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="category-card" onclick="window.location.href='#'">
+                      <img src="kategori3.jpg" alt="Elektronik Müzik">
+                      <div class="card-body">
+                        <h5 class="card-title">Elektronik Müzik</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+
+            </div>
+
+
+          </div>
+        {{else}}
+
+          <div class="layoutAllMusics rounded-2 pb-3 mt-3">
+            <div class="container">
+              <div class="row">
+                <div class="d-flex justify-content-around align-items-center">
+                  <h2 class="text-white">Musics</h2>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container mt-5">
+
+              <div class="row ">
+
+                {{#if searchResults}}
+                  <div class="search-results">
+                    <table class="table table-hover table-borderless">
+                      <div class="container d-flex ">
+
+                        <button id="btnShowResults" class="btn " type="button"><i
+                            class="fa-solid fa-arrows-up-down bg-dark text-white"></i></button>
+                        <h6 class="text-white mt-2">Search Results : </h6>
+                      </div>
+
+                      <tbody id="resultsBody">
+                        {{#each searchResults}}
+                          <tr class="table-info">
+                            <td class="btnPlayThisMusic resultTd">
+
+                              {{name}}
+
+                            </td>
+                          </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                    <div class="container mb-3" style="height: 20px;"></div>
+                  </div>
+                {{/if}}
+
+
+                {{#each allMusic}}
+                  <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+                    <div class="card rounded-4 " style="width: 11rem; background-color:rgb(167, 190, 209)">
+                      <div class="card-body btn btnPlayThisMusic">
+                        <img class="w-50" src="/images/music-images.png">
+                        <p class="card-title text-truncate ">{{name}}</p>
+                        <p class="card-subtitle text-truncate text-muted">{{artist}}</p>
+                      </div>
+                      <div class="card-footer d-flex justify-content-center">
+                        <button type="button" data-id="{{fileId}}" class="btn btn-dark text-white me-3"
+                          id="btnDeleteMusic"><i class="fa-regular fa-trash-can"></i></button>
+
+                        {{#if isFavourite this}}
+                          <button type="button" data-id="{{fileId}}" class="btn btn-danger text-black-50"
+                            id="btnUnFavouriteMusic"><i class="fa-solid fa-heart"></i></button>
+                        {{else}}
+                          <button type="button" data-id="{{fileId}}" class="btn btn-dark text-white"
+                            id="btnFavouriteMusic"><i class="fa-regular fa-heart "></i></button>
+                        {{/if}}
+                      </div>
+
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+
+            </div>
+
+
+
+            <nav style="position: relative" class="d-flex justify-content-center m-3"
+              aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+
+            </nav>
+
+            <div class="d-flex justify-content-end ">
+              <button type="button" class="btn btn-danger" id="getApi">API request</button>
+            </div>
+
+
+          </div>
+        {{/if}}
+      </div>
+
     </div>
 
+  </div>
 
+  {{> pagesModalAddMusic}}
 
-
-
-
-
-
-
-
-
-    {{> pagesModalAddMusic}}
 
 </template>

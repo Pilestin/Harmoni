@@ -17,13 +17,7 @@ Template.pagesSignIn.events({
       lastName: lastName,
       email: emailAddress,
       password: password,
-      favoriteMusic : [],
-      currentPlay : "",
-      friendList : [],
       profilePhoto : profilePhoto,
-      createdAt : new Date(),
-      updatedAt : new Date(),
-      
     }
     console.log("obj : ", obj);
 

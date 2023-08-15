@@ -4,14 +4,14 @@ It is a social music application where you can listen to music, create lists, se
 
 Goals:
 
-- [ ]  Sign up and login
-- [ ]  Ability to listen to music
-- [ ]  Music search
-- [ ]  Ability to see music categories
-- [ ]  Ability to create music lists
-- [ ]  Ability to add friends
-- [ ]  See what your friends are listening to
-- [ ]  Ability to listen live to what your friends are listening to
+- [x]  Sign up and login
+- [x]  Ability to listen to music
+- [x]  Music search
+- [x]  Ability to see music categories
+- [x]  Ability to create music lists
+- [x]  Ability to add friends
+- [x]  See what your friends are listening now
+- [x]  Ability to listen live to what your friends are listening to
 
 
 ### Koleksiyonlar (Collections) : : 

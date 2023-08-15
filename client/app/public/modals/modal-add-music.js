@@ -21,11 +21,13 @@ Template.pagesModalAddMusic.events({
         const musicCategory = event.target.musicCategory.value;
         const musicYear = event.target.musicYear.value;
         const musicLanguage = event.target.musicLanguage.value; 
-        
+        const musicImage = event.target.musicImage.value;
         const fileInput = event.target.musicFile;
         const musicFile = fileInput.files[0]; 
 
 
+
+        
         if (!musicFile) {
           console.log('Not selected');
           return;
@@ -53,6 +55,7 @@ Template.pagesModalAddMusic.events({
                 category: musicCategory,
                 year: musicYear,
                 language: musicLanguage,
+                image: musicImage,
                 fileId: result._id,
                 filePath: result.path,
                 createdAt: new Date(),

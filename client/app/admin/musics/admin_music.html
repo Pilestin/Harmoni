@@ -1,0 +1,42 @@
+<template name="adminMusics">
+
+    <div class="container mt-5">
+        <h2>Music List</h2>
+        <table class="table table-striped ">
+            <thead class="">
+                <tr>
+                    <th class="table-warning" scope="col">Image</th>
+                    <th class="table-warning" scope="col">Name</th>
+                    <th class="table-warning" scope="col">Album</th>
+                    <th class="table-warning" scope="col">Category</th>
+                    <th class="table-warning" scope="col">Year</th>
+                    <th class="table-warning" scope="col">Language</th>
+                    <th class="table-warning" scope="col">Düzenle</th>
+                    <th class="table-warning" scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each allMusics}}
+                <tr>
+                    <td scope="row"><img src="{{musicImage}}" alt="" class="rounded-circle" width="32" height="32"></td>
+                    <td ><span class="h6">{{name}} </span><br> {{artist}}</td>
+                    <td>{{album}}</td>
+                    <td>{{category}}</td>
+                    <td>{{year}}</td>
+                    <td>{{language}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm btnEditMusic">
+                            <i class="fa-solid fa-pen"></i> Düzenle
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm btnDeleteMusic">
+                            <i class="fa-regular fa-trash-can"></i> Sil
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>

@@ -1,7 +1,7 @@
 <template name="componentsNavbar">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="componentsNavbar navbar navbar-expand-lg">
 
     <div class="container-fluid d-flex justify-content-around">
   
@@ -13,9 +13,9 @@
         </div>
   
         <div class="navbarSearchBarDiv col-lg-6 col-md-4 col-sm-12">
-          <form class="d-flex">
-            <input type="text" class="form-control me-2 rounded-5" id="searchInput" placeholder="Müzik ara..." style="width: 300px;" >
-            <button type="submit" class="btn rounded-5 btnMusicSearch">Ara</button>
+          <form id="formSearch" class="d-flex">
+            <input type="text" class="form-control me-2 rounded-5" id="musicSearchInput" placeholder="Müzik ara..." style="width: 300px;" >
+            <button type="submit" class="btn rounded-5 btn-info btnMusicSearch">Ara</button>
           </form>
         </div>
   

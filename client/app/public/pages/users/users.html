@@ -1,10 +1,5 @@
 <template name="pagesUsers">
 
-
-  Şimdilik üstteki geri ve ileri butonlarımız çalışmıyor.  
-  O yüzden şu alttaki ile ana sayfaya gidebilirsin :D  
-
-  <br>
   <br>
 
 
@@ -13,67 +8,87 @@
   <br>
   <br>
 
-    <div class="pagesUsers container">
+  <div class="pagesUsers container">
 
-        <!-- LİST TABLE-->
+    <!-- LİST TABLE-->
 
-        <div class="d-flex justify-content-center col-12 ">
-            <h2>Users</h2>
+    <div class="d-flex justify-content-center col-12 ">
+      <h2>Users</h2>
 
-        </div>
-        <br>
-        <hr>
-
-
-        
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Surname</th>
-                  <th scope="col">E-mail</th>
-                  <th scope="col">Current Play</th>
-                  <th scope="col">Add Friend</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each allUsers}}
-                <tr>
-                  <th scope="row"><img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50" ></th>
-                  <td>{{firstName}}</td>
-                  <td>{{lastName}}</td>
-                  <td>{{email}}</td>
-                  <td>{{currentPlay.name}}</td>
-                  {{#if isFriend this}}
-                  <td><button type="button" class="btn btn-danger " id="btnUnFriend">Remove</button></td>
-
-                  {{else}}
-                  <td><button type="button" class="btn btn-primary" id="btnAddFriend">Add Friend</button></td>
-
-                  {{/if}}
-
-                </tr>
-                {{/each}}
-              </tbody>
-        </table>
-
-        
-        
     </div>
-    <div class="container bg-light rounded-5">
-      <h6>Your friends</h6>
-      <br>
-      <ul>
-        {{#each myFriends}}
-          {{#with friend= (whoIs this._id)}}
-            <li>{{friend.firstName}} {{friend.lastName}}</li>
-          {{/with}}
+    <br>
+    <hr>
+
+    <div class="d-flex justify-content-center col-12 ">
+      <div class="col-4">
+        <input type="text" class="form-control" id="userSearchInput" placeholder="Search">
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-primary" id="btnUserSearch">Search</button>
+      </div>
+    </div>
+
+    <br>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Current Play</th>
+          <th scope="col">Add Follow</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each allUsers}}
+          <tr>
+            <th scope="row">
+              {{#if status.online}}
+              <div class="profile-photo" style="background-color: #4bff1a">
+                <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
+              </div>
+              {{else}}
+              <div class="profile-photo" style="background-color: #e31313">
+                <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
+              </div>
+              {{/if}}
+              
+            </th>
+
+            <td>{{firstName}}</td>
+            <td>{{lastName}}</td>
+            <td>{{email}}</td>
+            <td>{{currentPlay.name}}</td>
+            {{#if isFriend this}}
+              <td><button type="button" class="btn btn-danger " id="btnUnFriend">Unfollow</button></td>
+
+            {{else}}
+              <td><button type="button" class="btn btn-primary" id="btnAddFriend">Follow</button></td>
+            {{/if}}
+
+          </tr>
         {{/each}}
+      </tbody>
+    </table>
+
+
+
+  </div>
+  <div class="container bg-light rounded-5">
+    <h6>Your Follows</h6>
+    <br>
+    <ul>
+      {{#each myFriends}}
+        {{#with friend= (whoIs this._id)}}
+          <li>{{friend.firstName}} {{friend.lastName}}</li>
+        {{/with}}
+      {{/each}}
     </ul>
-    </div>
-    
-    
+  </div>
+
+
 
 
 

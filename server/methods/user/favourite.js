@@ -3,7 +3,6 @@
 Meteor.methods({
     'user_favourite': function(music) {
         
-        console.log("BACKEND DE user_favourite methodu çalıştı")
 
         if (!this.userId) {
             throw new Meteor.Error('not-authorized', 'You are not authorized to perform this action.');
@@ -17,7 +16,6 @@ Meteor.methods({
 
 Meteor.methods({
     'user_unfavourite': function(music) {
-        console.log("BACKEND DE user_unfavourite methodu çalıştı")
     
         if (!this.userId) {
             throw new Meteor.Error('not-authorized', 'You are not authorized to perform this action.');

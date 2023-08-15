@@ -7,3 +7,4 @@ Meteor.methods({
         return User.insert(user);
     }
 })
+

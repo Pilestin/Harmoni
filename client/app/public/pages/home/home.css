@@ -1,71 +1,85 @@
-.pagesHome h3 span{
-    color : yellowgreen;
-    font-weight: 600;
+.pagesHome h3 span {
+  color: yellowgreen;
+  font-weight: 600;
 }
+
 .panelLeft {
-    background-color:rgb(39, 39, 36);
+  background-color: rgb(39, 39, 36);
 }
 
 .pagesHome {
-    background-color: rgb(39, 39, 36);
+  background-color: rgb(39, 39, 36);
 }
 
-.searchBar{
-    background-color: gainsboro;
+.searchBar {
+  background-color: gainsboro;
 }
 
-.parent {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
-}
-    
+
 
 
 .user-info-container {
-    width: 300px;
-    height: 40px;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  #scrollingText {
-    color: burlywood;
-    position: absolute;
-    white-space: nowrap;
-    animation: scrolling 12s linear infinite;
-  }
-  #scrollingText:hover {
-    animation-play-state: paused;
-  }
-  
-  @keyframes scrolling {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  
+  width: 300px;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
 
+#scrollingText {
+  color: burlywood;
+  position: absolute;
+  white-space: nowrap;
+  animation: scrolling 12s linear infinite;
+}
 
+#scrollingText:hover {
+  animation-play-state: paused;
+}
 
-  #nowPlaying{
-    color: rgb(204, 31, 31);
+@keyframes scrolling {
+  0% {
+    transform: translateX(100%);
   }
 
- #friendsMusicsArtist{
-    color: burlywood
- }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
- #friendsName{
-    color: rgb(57, 200, 200);
-    font-weight: 600;
- }
 
- table {
+
+
+#nowPlaying {
+  color: rgb(204, 31, 31);
+}
+
+#friendsMusicsArtist {
+  color: burlywood
+}
+
+#friendsName {
+  color: rgb(57, 200, 200);
+  font-weight: 600;
+}
+
+.search-result {
   background-color: rgb(39, 39, 36);
- }
+
+}
+
+.resultTd {
+  border-radius: 15px;
+  border: 1px;
+  background-color: rgb(174, 146, 74);
+
+  display: flex;
+  margin-top: 2px;
+  height: 50px;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+#resultsBody {
+  background-color: rgb(39, 39, 36);
+}

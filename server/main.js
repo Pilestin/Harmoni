@@ -5,8 +5,10 @@ import { WebApp } from 'meteor/webapp';
 
 
 Meteor.startup(() => {
-  // code to run on server at startup
 
+  // Migrations.migrateTo(1);
+
+  // Bu kodu yazan cennetlik 
   WebApp.connectHandlers.use('/musics', (req, res) => {
     const musicFile = Assets.absoluteFilePath('musics/' + req.url.slice(1));
     res.setHeader('Content-Type', 'audio/mpeg');
@@ -15,10 +17,13 @@ Meteor.startup(() => {
     const readStream = fs.createReadStream(musicFile);
     readStream.pipe(res);
   });
-});
+
+}); 
+
 
 Accounts.onCreateUser((obj, user) => {
-  
+
+  Migrations.migrateTo(1);
   // user nesnesine ekstra özellikleri ekleyin
   user.firstName = obj.firstName;
   user.lastName = obj.lastName;
@@ -27,8 +32,13 @@ Accounts.onCreateUser((obj, user) => {
   user.favoriteMusic = [];
   user.currentPlay = "";
   user.friendList = [];
-  user.createdAt = new Date();
   user.profilePhoto = obj.profilePhoto;
+
+  user.createdAt = new Date();
+  user.updatedAt = new Date();
+
+
+
   // console.log("onCreateUser çalıştı")
   console.log("user server : ", user)
   // Düzenlenmiş kullanıcı nesnesini döndürün
@@ -36,14 +46,21 @@ Accounts.onCreateUser((obj, user) => {
 });
 
 
-Meteor.methods({'list_user' : function(){
-  console.log("list_user methodu çalıştı");
-  return User.find({}).fetch();
-}});
-
-
+// Bu niye burda ve kullanılıyor mu emin değilim :D 
 Meteor.methods({
-  'searchMusic' : async function(query){
+  'list_user': function () {
+    console.log("list_user methodu çalıştı");
+    return User.find({}).fetch();
+  }
+});
+
+
+
+// ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF
+// SPOTİFY api kullanarak müzik aramaya yarar.
+// Önce en alttaki metod ile access token elde edilir.
+Meteor.methods({
+  'searchMusic': async function (query) {
     const accessToken = await getAccessToken();
     const trackId = '3n3Ppam7vgaVa1iaRUc9Lp'; // Örnek olarak, bir şarkının Spotify ID'sini buraya girin
 
@@ -66,7 +83,8 @@ Meteor.methods({
   }
 })
 
-
+// ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF
+// SPOTİFY api kullanarak access token elde etmeye yarar. 
 async function getAccessToken() {
   const url = 'https://accounts.spotify.com/api/token';
   const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');

@@ -25,7 +25,6 @@ Meteor.methods({
     'user_unfriend': function(userId) {
 
         const me = Meteor.user();
-
         Meteor.users.update({_id: me._id}, {
             $pull: {
                 friendList: {

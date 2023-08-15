@@ -1,0 +1,43 @@
+<template name="adminUsers">
+
+    <div class="container mt-5">
+        <h2>User List</h2>
+        <table class="table">
+            <thead >
+                <tr>
+                    <th class="table-danger" scope="col">Image</th>
+                    <th class="table-danger"  scope="col">Name</th>
+                    <th class="table-danger" scope="col">Email</th>
+                    <th class="table-danger" scope="col">Password</th>
+                    <th class="table-danger" scope="col">Friend List</th>
+                    <th class="table-danger" scope="col">FavouriteMusic</th>
+                    <th class="table-danger" scope="col">Düzenle</th>
+                    <th class="table-danger" scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each allUsers}}
+                <tr>
+                    <td scope="row"><img src="{{profilePhoto}}" alt="" class="rounded-circle" width="32" height="32"></td>
+                    <td><span class="h6">{{firstName}} {{lastName}} </span></td>
+                    <td>{{email}}</td>
+                    <td>{{password}}</td>
+                    <td>{{friendList}}</td>
+                    <td>{{favouriteMusic}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm btnEditMusic">
+                            <i class="fa-solid fa-pen"></i> Düzenle
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm btnDeleteMusic">
+                            <i class="fa-regular fa-trash-can"></i> Sil
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</template>

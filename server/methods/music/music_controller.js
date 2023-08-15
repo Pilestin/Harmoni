@@ -45,9 +45,29 @@ Meteor.methods({
         return _id ;
     },
     // kullanılmıyor şimdilik
-    "searchMusic_temp": function(query) {
-        // Yeni müzik belgesini oluşturup veritabanına ekleyin
-        console.log("query : ", query)
-        return query
+    'music.search' : function(query) {
+        const userId = Meteor.userId();
+        const user = Meteor.users.findOne({ _id: userId });
+
+        
+
+        if (query.trim() === "" || query.trim().length < 3) {
+            // Boş bir sorgu olduğunda boş bir dizi döndür
+            return [];
+        }
+        
+        if (user) {
+            const result = Music.find({
+                $or: [
+                    // options i : case sensitive olmaması için
+                    { name: { $regex: query, $options: 'i' } },
+                    { artist: { $regex: query, $options: 'i' } }
+                ]
+            }).fetch();
+            console.log("result : ", result)
+            return result;
+        }
+        
+        return [];
     }
 });

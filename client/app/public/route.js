@@ -32,12 +32,12 @@ FlowRouter.route('/users', {
   }
 });
 
-FlowRouter.route('/anasayfa', {
-  name: 'pages.anasayfa',
-  action: function (params, queryParams) {
-    this.render('publicLayouts', { page: 'pagesAnasayfa' });
-  }
-});
+// FlowRouter.route('/home', {
+//   name: 'pages.home',
+//   action: function (params, queryParams) {
+//     this.render('publicLayouts', { page: 'pagesHome' });
+//   }
+// });
 
 
 // FlowRouter.route('/addMusic', {

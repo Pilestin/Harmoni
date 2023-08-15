@@ -1,5 +1,63 @@
 <template name="pagesProfile">
 
-    Prrofile sayfası
 
+    <br>
+
+    <button class="btn btn-primary ms-3" type="button" id="btnProfileTurnHome"> Home</button>
+
+
+    <br>
+
+
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Arkadaş Listesi -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Your Friends</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {{#each myFriends}}
+                                {{#with user=(whoIs this._id)}}
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {{user.firstName}} {{user.lastName}}
+                                            <button type="button" class="btn btn-danger"
+                                                id="btnProfileRemoveFriend">Unfollow</button>
+
+                                        </div>
+                                    </li>
+                                {{/with}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- Sevdiği Müzikler -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Your Favorite Music</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {{#each myFavouriteMusic}}
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {{artist}} - {{name}} 
+                                            <button type="button" class="btn btn-danger"
+                                                id="btnProfileRemoveMusic">Remove</button>
+
+                                        </div>
+                                    </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

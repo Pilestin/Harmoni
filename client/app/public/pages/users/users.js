@@ -7,27 +7,11 @@ Template.pagesUsers.onCreated(function () {
     self.subscribeMusics = self.subscribe('music.list')
     self.subscribeMusicFiles = self.subscribe('musicFiles.all')
 
-    self.users = new ReactiveVar()
-    self.musics = new ReactiveVar()
-    self.musicFiles = new ReactiveVar()
 
     self.autorun(function () {
-        if (self.subscribeUsers.ready()) {
-            const users = Meteor.users.find({}).fetch()
-            self.users.set(users)
-        }
-        if (self.subscribeMusics.ready()) {
-            const musics = Music.find({}).fetch()
-            self.musics.set(musics)
-        }
-        if (self.subscribeMusicFiles.ready()) {
-            const musicFiles = MusicFiles.find({}).fetch()
-            self.musicFiles.set(musicFiles)
-        }
+        
     })
 })
-
-
 
 Template.pagesUsers.helpers({ 
     
@@ -47,7 +31,6 @@ Template.pagesUsers.helpers({
 
 
         const isFriend = friends.find((friend) => friend._id === user._id);
-        console.log("isFriend : ", isFriend);
         return isFriend ? true : false;
     }
 
@@ -104,6 +87,26 @@ Template.pagesUsers.events({
     )},
     'click #btnTurnHome' : function(event, template){
         FlowRouter.go('pages.home');
-    }
+    },
+    'input #userSearchInput': function (event, template) {
+        event.preventDefault();
+        const query = document.getElementById('userSearchInput').value;
+        console.log("query : ", query)
+    
+        Meteor.call('user.search', query, function (err, res) {
+          if (err) {
+            console.log("err : ", err)
+          }
+          UserResults.set('userResults', res);
+          console.log(res)
+        })
+    
+      },
 
 });
+
+Template.componentsNavbar.onDestroyed(function () {
+
+    UserResults.set('userResults', []);
+  
+  });
