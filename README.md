@@ -2,15 +2,15 @@
 
 It is a social music application where you can listen to music, create lists, see your friends and what they are listening to.
 
-[Achievement](#achievement)
+[Achievement](#achievement-)
 
-[Installation and Run](installation-and-run)
+[Installation and Run](installation-and-run-)
 
-[How to play music (local)](how-to-play-music-(local))
+[How to play music (local)](how-to-play-music-(local)-)
 
 [Goals](goals)
 
-[Koleksiyonlar (Collections)](koleksiyonlar-(collections))
+[Koleksiyonlar (Collections)](koleksiyonlar-(collections)-)
 
 ## Achievement : 
 
