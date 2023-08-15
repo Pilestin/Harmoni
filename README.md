@@ -2,7 +2,84 @@
 
 It is a social music application where you can listen to music, create lists, see your friends and what they are listening to.
 
-Goals:
+Achievement : 
+
+- Sign up and login
+- Ability to listen to music
+- Music search
+- Ability to see music categories
+- Ability to create favourite music lists
+- Ability to follow users
+- See what your friends are listening now
+- Ability to listen to what your friends are listening to
+  
+
+
+
+
+### Installations and Run :
+
+```bash
+> git clone https://github.com/Pilestin/Harmoni
+> cd Harmoni
+> npm install
+> meteor
+```
+
+
+### How to play music (local) :
+
+The music uploaded in the project is copied in the public/musics folder (like public/images in images). The feature of this folder is that it can be accessed from the url.
+
+Using this, the music is taken from the url (saved with the id) and turned into a playable content.
+
+e.x : http://localhost:3000/musics/C4tb7b62sYRndiApJ.mp3 
+
+on server : 
+  
+  ```jsx
+    WebApp.connectHandlers.use('/musics', (req, res) => {
+    const musicFile = Assets.absoluteFilePath('musics/' + req.url.slice(1));
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Disposition', 'attachment');
+    res.writeHead(200);
+    const readStream = fs.createReadStream(musicFile);
+    readStream.pipe(res);
+  });
+  ```
+
+  on client : 
+
+  ```jsx
+  const playMusic = function (music) {
+    const musicFile = MusicFiles.findOne({ _id: music.fileId });
+
+    const musicUrl = 'http://localhost:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    fetch(musicUrl)
+        .then(response => response.arrayBuffer())
+        .then(buffer => audioContext.decodeAudioData(buffer))
+        .then(decodedData => {
+            const audioElement = document.getElementById('audioPlayer');
+            audioElement.src = musicUrl; // Audio etiketine URL'yi atıyoruz
+            audioElement.play(); // Müziği çalıyoruz
+        })
+        .catch(error => console.error('Error loading audio: ', error));
+
+
+    Meteor.call('user_currentPlay', music, function (err, res) {
+        if (err) {
+            console.log("err : ", err)
+        }
+        console.log("res : ", res)
+    });
+}
+  ```
+
+  
+### Goals:
 
 - [x]  Sign up and login
 - [x]  Ability to listen to music
