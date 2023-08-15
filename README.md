@@ -2,7 +2,17 @@
 
 It is a social music application where you can listen to music, create lists, see your friends and what they are listening to.
 
-Achievement : 
+[Achievement](achievement)
+
+[Installation and Run](installation-and-run)
+
+[How to play music (local)](how-to-play-music-(local))
+
+[Goals](goals)
+
+[Koleksiyonlar (Collections)](koleksiyonlar-(collections))
+
+## Achievement : 
 
 - Sign up and login
 - Ability to listen to music
@@ -13,6 +23,12 @@ Achievement :
 - See what your friends are listening now
 - Ability to listen to what your friends are listening to
   
+
+<img src="https://github.com/Pilestin/Harmoni/assets/56133248/99b5e4c3-08d7-41e4-9e73-6f95d68956a0" width="700px">
+<img src="https://github.com/Pilestin/Harmoni/assets/56133248/b3e669d6-9334-4dca-907a-aa774330f7a5" width="700px">
+<img src="https://github.com/Pilestin/Harmoni/assets/56133248/a5a275a9-7fd4-4106-9ff1-b905228443c2" width="700px">
+<img src="https://github.com/Pilestin/Harmoni/assets/56133248/2832d4c0-0c69-4ae2-8201-c3cbd6aab564" width="700px">
+
 
 
 
