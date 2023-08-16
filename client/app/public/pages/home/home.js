@@ -71,7 +71,6 @@ Template.pagesHome.helpers({
 
     },
     searchResults: function () {
-        console.log("GlobalSearchResults.get('musicResults') : ", GlobalSearchResults.get('musicResults'))
         return GlobalSearchResults.get('musicResults');
     },
     categoryFlag: function () {
@@ -84,7 +83,7 @@ Template.pagesHome.helpers({
 const playMusic = function (music) {
     const musicFile = MusicFiles.findOne({ _id: music.fileId });
 
-    const musicUrl = 'http://localhost:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+    const musicUrl = 'http://192.168.31.67:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -106,7 +105,18 @@ const playMusic = function (music) {
         console.log("res : ", res)
     });
 }
+// Playerdaki müzik bilgilerini değiştirmek için kullanılır
+const audioInfoChanger = function (music) {
+    const playerTitle = document.getElementById('playerTitle');
+    const playerArtist = document.getElementById('playerArtist');
+    const playerImage = document.getElementById('playerImage');
 
+    playerTitle.innerHTML = music.name;
+    playerArtist.innerHTML = music.artist;
+    if (music.image) {
+        playerImage.src = music.image;
+    }
+}
 
 Template.pagesHome.events({
     // Bu fonksiyon, SPOTİFY API'ye istek atarak müzik verilerini alır
@@ -158,18 +168,20 @@ Template.pagesHome.events({
         event.preventDefault()
         const music = Music.findOne({ _id: this._id });
 
-        const playerTitle = document.getElementById('playerTitle');
-        const playerArtist = document.getElementById('playerArtist');
-        const playerImage = document.getElementById('playerImage');
-
-        playerTitle.innerHTML = music.name;
-        playerArtist.innerHTML = music.artist;
-        if (music.image) {
-            playerImage.src = music.image;
-        }
-
+        audioInfoChanger(music);
         playMusic(music);
     },
+        // Bu metod arkadaşın dinlediği son müziği çalar
+        'click .btnPlayFriendsMusic': function (event, template) {
+            event.preventDefault()
+    
+            const friendId = this._id;
+            const friend = Meteor.users.findOne({ _id: friendId });
+            const music = friend.currentPlay;
+    
+            audioInfoChanger(music);
+            playMusic(music);
+        },
     // Bu metod müzik silmek için çalışır.
     'click #btnDeleteMusic': async function (event, template) {
         event.preventDefault()
@@ -205,6 +217,8 @@ Template.pagesHome.events({
             console.log("res : ", res)
         })
     },
+
+
     // Bu metod müzik favorilemekten çıkarmak için çalışır.
     'click #btnUnFavouriteMusic': function (event, template) {
         event.preventDefault()
@@ -216,16 +230,6 @@ Template.pagesHome.events({
             }
             console.log("res : ", res)
         })
-    },
-    // Bu metod arkadaşın dinlediği son müziği çalar
-    'click .btnPlayFriendsMusic': function (event, template) {
-        event.preventDefault()
-
-        const friendId = this._id;
-        const friend = Meteor.users.findOne({ _id: friendId });
-        const music = friend.currentPlay;
-
-        playMusic(music);
     },
     // Bu metod müzik arama sonuçlarını açıp kapatmak içindir. 
     // - Butona tıklandığında Css bilgisini değiştirerek aç-kapa yapar

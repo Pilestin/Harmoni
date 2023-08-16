@@ -151,9 +151,11 @@
                         <img src="{{friend.profilePhoto}}" alt="" class="rounded-circle " width="32" height="32">
                         <h6 id="friendsName">{{friend.firstName}} {{friend.lastName}} </h6>
                         {{#if friend.status.online}}
-                        <small class="text-secondary"><i class="fa-solid fa-circle fa-fade" style="color: #4bff1a;"></i></small>
+                          <small class="text-secondary"><i class="fa-solid fa-circle fa-fade"
+                              style="color: #4bff1a;"></i></small>
                         {{else}}
-                        <small class="text-secondary"><i class="fa-solid fa-circle" style="color: #ff1a1a;"></i></small>
+                          <small class="text-secondary"><i class="fa-solid fa-circle"
+                              style="color: #ff1a1a;"></i></small>
                         {{/if}}
 
                       </div>
@@ -183,42 +185,51 @@
                 </div>
               </div>
             </div>
-
+            
             <div class="row">
 
-              <div class="container mt-5">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="category-card" onclick="window.location.href='#'">
-                      <img src="kategori1.jpg" alt="Pop Müzik">
-                      <div class="card-body">
-                        <h5 class="card-title">Pop Müzik</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="category-card" onclick="window.location.href='#'">
-                      <img src="kategori2.jpg" alt="Rock Müzik">
-                      <div class="card-body">
-                        <h5 class="card-title">Rock Müzik</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="category-card" onclick="window.location.href='#'">
-                      <img src="kategori3.jpg" alt="Elektronik Müzik">
-                      <div class="card-body">
-                        <h5 class="card-title">Elektronik Müzik</h5>
-                      </div>
-                    </div>
+              <div class="col-lg-6 col-md-4 col-sm-3">
+                <div class="card rounded-5 category-card-classic ">
+                  <div class="card-body ">
+                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
+                    <p class="card-title text-truncate ">Classical Music</p>
+                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
                   </div>
                 </div>
               </div>
-              
 
+              <div class="col-lg-6 col-md-4 col-sm-3">
+                <div class="card rounded-5 category-card-pop ">
+                  <div class="card-body ">
+                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
+                    <p class="card-title text-truncate ">Pop Music</p>
+                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
+                  </div>
+                </div>
+              </div>
 
             </div>
-
+            <br>
+            <div class="row">
+              <div class="col-lg-6 col-md-4 col-sm-3">
+                <div class="card rounded-5 category-card-blues ">
+                  <div class="card-body ">
+                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
+                    <p class="card-title text-truncate ">Blues Music</p>
+                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-4 col-sm-3">
+                <div class="card rounded-5 category-card-turkish ">
+                  <div class="card-body ">
+                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
+                    <p class="card-title text-truncate ">Turkish Music</p>
+                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         {{else}}
@@ -268,7 +279,11 @@
                   <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
                     <div class="card rounded-4 " style="width: 11rem; background-color:rgb(167, 190, 209)">
                       <div class="card-body btn btnPlayThisMusic">
-                        <img class="w-50" src="/images/music-images.png">
+                        {{#if image}}
+                          <img class="rounded-4" src="{{image}}" width="100" height="100">
+                        {{else}}
+                          <img class="mr-3" src="/images/music-images.png" width="140">
+                        {{/if}}
                         <p class="card-title text-truncate ">{{name}}</p>
                         <p class="card-subtitle text-truncate text-muted">{{artist}}</p>
                       </div>

@@ -46,14 +46,6 @@ Accounts.onCreateUser((obj, user) => {
 });
 
 
-// Bu niye burda ve kullanılıyor mu emin değilim :D 
-Meteor.methods({
-  'list_user': function () {
-    console.log("list_user methodu çalıştı");
-    return User.find({}).fetch();
-  }
-});
-
 
 
 // ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF

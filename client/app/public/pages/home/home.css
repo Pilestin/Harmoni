@@ -83,3 +83,36 @@
 #resultsBody {
   background-color: rgb(39, 39, 36);
 }
+
+.category-card-classic {
+  background-image: url('/images/category/classical.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+
+}
+.category-card-pop{
+  background-image: url('/images/category/pop.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+
+}
+.category-card-blues{
+  background-image: url('/images/category/blues.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+
+}
+.category-card-turkish{
+  background-image: url('/images/category/turkish.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+
+}

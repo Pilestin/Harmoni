@@ -21,12 +21,47 @@
 
     <div class="d-flex justify-content-center col-12 ">
       <div class="col-4">
-        <input type="text" class="form-control" id="userSearchInput" placeholder="Search">
+        <input type="text" class="form-control" id="userSearchInputUsersPage" placeholder="Search">
       </div>
       <div class="col-2">
         <button type="button" class="btn btn-primary" id="btnUserSearch">Search</button>
       </div>
     </div>
+
+    {{#if userResults}}
+      <div class="search-results">
+        <table class="table table-hover table-borderless">
+          <div class="container d-flex ">
+
+            <button id="btnShowUserResults" class="btn" type="button"><i
+                class="fa-solid fa-arrows-up-down bg-dark text-white"></i></button>
+            <h6 class="text-white mt-2">Search Results : </h6>
+          </div>
+
+          <tbody id="resultsUserBody">
+            {{#each userResults}}
+              <tr class="table-info">
+                <td class="resultTd">
+                  <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50"> 
+                  <div class="container">
+                    {{firstName}} - {{lastName}}
+                  </div>
+                  {{#if isFriend this}}
+                    <td><button type="button" class="btn btn-danger " id="btnUnFriend">Unfollow</button></td>
+
+                  {{else}}
+                    <td><button type="button" class="btn btn-primary" id="btnAddFriend">Follow</button></td>
+                  {{/if}}
+                  
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <div class="container mb-3" style="height: 20px;"></div>
+      </div>
+    {{/if}}
+
 
     <br>
 
@@ -46,15 +81,15 @@
           <tr>
             <th scope="row">
               {{#if status.online}}
-              <div class="profile-photo" style="background-color: #4bff1a">
-                <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
-              </div>
+                <div class="profile-photo" style="background-color: #4bff1a">
+                  <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
+                </div>
               {{else}}
-              <div class="profile-photo" style="background-color: #e31313">
-                <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
-              </div>
+                <div class="profile-photo" style="background-color: #e31313">
+                  <img src="{{profilePhoto}}" class="rounded-circle " width="50" height="50">
+                </div>
               {{/if}}
-              
+
             </th>
 
             <td>{{firstName}}</td>
