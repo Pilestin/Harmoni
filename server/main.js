@@ -4,13 +4,16 @@ import fetch from 'node-fetch';
 import { WebApp } from 'meteor/webapp';
 
 
+
 Meteor.startup(() => {
+
 
   // Migrations.migrateTo(1);
 
   // Bu kodu yazan cennetlik 
   WebApp.connectHandlers.use('/musics', (req, res) => {
     const musicFile = Assets.absoluteFilePath('musics/' + req.url.slice(1));
+
     res.setHeader('Content-Type', 'audio/mpeg');
     res.setHeader('Content-Disposition', 'attachment');
     res.writeHead(200);
@@ -18,8 +21,54 @@ Meteor.startup(() => {
     readStream.pipe(res);
   });
 
-}); 
+  // WebApp.connectHandlers.use('/musics/:trackId', (req, res, next) => {
+  //   const { trackId } = req.params;
+  //   const musicFile = path.join(process.env.PWD, 'public/musics', trackId);
 
+  //   const stat = fs.statSync(musicFile);
+  //   const fileSize = stat.size;
+  //   const range = req.headers.range;
+
+  //   if (range) {
+  //     const parts = range.replace(/bytes=/, '').split('-');
+  //     const start = parseInt(parts[0], 10);
+  //     const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+
+  //     const chunkSize = (end - start) + 1;
+  //     const file = fs.createReadStream(musicFile, { start, end });
+
+  //     const headers = {
+  //       'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+  //       'Accept-Ranges': 'bytes',
+  //       'Content-Length': chunkSize,
+  //       'Content-Type': 'audio/mpeg',
+  //     };
+
+  //     res.writeHead(206, headers);
+  //     file.pipe(res);
+  //   } else {
+  //     const headers = {
+  //       'Content-Length': fileSize,
+  //       'Content-Type': 'audio/mpeg',
+  //     };
+  //     res.writeHead(200, headers);
+  //     fs.createReadStream(musicFile).pipe(res);
+  //   }
+  // });
+
+
+  // control offline users currentPlay 
+
+});
+
+if (Meteor.isServer) {
+  console.log("server çalıştı")
+  Meteor.users.update(
+    { "status.online": false },
+    { $set: { currentPlay: "" } },
+    { multi: true });
+ 
+}
 
 Accounts.onCreateUser((obj, user) => {
 
@@ -47,6 +96,25 @@ Accounts.onCreateUser((obj, user) => {
 
 
 
+// ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF
+// SPOTİFY api kullanarak access token elde etmeye yarar. 
+async function getAccessToken() {
+  const url = 'https://accounts.spotify.com/api/token';
+  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const body = new URLSearchParams({ grant_type: 'client_credentials' });
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: body.toString(),
+  });
+
+  const data = await response.json();
+  return data.access_token;
+}
 
 // ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF
 // SPOTİFY api kullanarak müzik aramaya yarar.
@@ -75,22 +143,3 @@ Meteor.methods({
   }
 })
 
-// ŞU AN KULLANILMIYOR AMA PROJEDE AKTİF
-// SPOTİFY api kullanarak access token elde etmeye yarar. 
-async function getAccessToken() {
-  const url = 'https://accounts.spotify.com/api/token';
-  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-  const body = new URLSearchParams({ grant_type: 'client_credentials' });
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: body.toString(),
-  });
-
-  const data = await response.json();
-  return data.access_token;
-}

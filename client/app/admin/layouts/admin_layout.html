@@ -1,40 +1,32 @@
 <template name="adminLayouts">
 
 
+  {{#if isLoading}}
+    <div class="container mt-5 text-center d-flex justify-content-center align-items-center">
+      <i class="fa-solid fa-spinner fa-spin-pulse fa-xl"></i>    
+    </div>
+  {{else}}
     {{#if isAdmin}}
 
+      {{> adminExtra}}
+      <br>
+      {{> adminDashboard}}
+      <br>
 
-        <div class="container d-flex justify-content-center">
-            <h1>Admin Page</h1>
-        </div>
-
-        <br>
-
-        {{> adminDashboard}}
-
-        <br>
-        <br>
-
-        <div class="flex-fill">
-            {{> Template.dynamic template=page}}
-        </div>
-
-        {{> adminHome}}
-
-
-
+      <div class="flex-fill">
+        {{> Template.dynamic template=page}}
+      </div>
 
     {{else}}
-    <div class="container text-center mt-5">
+      <div class="container text-center mt-5">
         <h1 class="mb-3">You are not authorized as an admin</h1>
         <p class="text-danger">Only administrators have access to this page.</p>
         <a class="btn btn-primary" href="/home">Go to Home Page</a>
-    </div>
-    
+      </div>
+
     {{/if}}
+  {{/if}}
 
-    <br>
-
-
+  <br>
 
 </template>

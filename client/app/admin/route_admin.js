@@ -24,6 +24,13 @@ FlowRouter.route('/admin/users', {
   }
 });
 
+FlowRouter.route('/user/:id', {
+  name: 'pages.userprofile',
+  action: function (params, queryParams){
+    this.render('adminLayouts', { page: 'pagesUserProfile' }); 
+  }
+});
+
 // FlowRouter.route('/dashboard', {
 //   name: 'admin.dashboard',
 //   triggersEnter: [checkAdmin],

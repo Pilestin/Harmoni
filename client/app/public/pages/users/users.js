@@ -36,6 +36,12 @@ Template.pagesUsers.helpers({
     userResults: function () {
         return UserResults.get('userResults');
     },
+    myFollowers : function(){
+        // const me = Meteor.user();
+        // const followers = me.followerList;
+        const followers = ["çok", "yakında"];
+        return followers;
+    }
 
 
 
@@ -98,8 +104,9 @@ Template.pagesUsers.events({
     'input #userSearchInputUsersPage': function (event, template) {
         event.preventDefault();
         const query = document.getElementById('userSearchInputUsersPage').value;
-        console.log("query : ", query)
-
+        if (query.trim() === '' || query.trim().length < 3) {
+            return [];
+        }
         Meteor.call('user.search', query, function (err, res) {
             if (err) {
                 console.log("err : ", err)

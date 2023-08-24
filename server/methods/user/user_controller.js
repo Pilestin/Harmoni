@@ -72,13 +72,13 @@ Meteor.methods({
             }
         });
         // birini eklediğinde o da seni eklemiş olur
-        Meteor.users.update({ _id: userId }, {
-            $addToSet: {
-                friendList: {
-                    _id: me._id
-                }
-            }
-        });
+        // Meteor.users.update({ _id: userId }, {
+        //     $addToSet: {
+        //         friendList: {
+        //             _id: me._id
+        //         }
+        //     }
+        // });
     },
     'user_unfriend': function (userId) {
 
@@ -107,11 +107,7 @@ Meteor.methods({
 
         const userId = Meteor.userId();
         const user = Meteor.users.findOne({ _id: userId });
-
-        if (query.trim() === '' || query.trim().length < 3) {
-            return [];
-        }
-
+        
         if (user) {
             const result = Meteor.users.find({
                 $or: [
@@ -120,10 +116,29 @@ Meteor.methods({
                     { lastName: { $regex: query, $options: 'i' } }
                 ]
             }).fetch();
-            console.log("result : ", result)
             return result;
         }
 
         return [];
+    }
+})
+
+Meteor.methods({
+    'user.delete': function (user) {
+        if (user) {
+            return Meteor.users.remove(user);
+        }
+        return false;
+    }
+
+})
+Meteor.methods({
+    'user.setMusic': function (user) {
+        Meteor.users.update(user._id, {
+            $set: {
+                currentPlay: ""
+            }
+        });
+        console.log("yeni hali : ", user)
     }
 })

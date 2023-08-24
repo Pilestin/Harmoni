@@ -1,27 +1,42 @@
-Template.adminLayouts.onCreated(function() {
+Template.adminLayouts.onCreated(function () {
     // Meteor.subscribe('users');
 
     this.isAdmin = new ReactiveVar(false);
+    this.isLoading = new ReactiveVar(true); // Yükleme durumunu saklayacak ReactiveVar
+
     const self = this
-    Meteor.call('admin.control', Meteor.userId(), function(error, result)  {
-        if (error) {
-            console.log("error : ", error)
-        }
-        if (result) {
-            console.log("Şu anda true olarak ayarlıyorum :",result)
-            self.isAdmin.set(true);
-        }
-    })
+    const user = Meteor.userId();
+
+    // loader - animasyon 
+
 });
 
-Template.adminLayouts.helpers({ 
-    isAdmin : function() {
+Template.adminLayouts.helpers({
+    isAdmin: function () {
         return Template.instance().isAdmin.get();
+    },
+    isLoading: function () {
+        //timeout ile 1 saniye bekletiyoruz
+        Meteor.setTimeout(function () {
+            
+        }, 1000);
+        return Template.instance().isLoading.get();
     }
-}); 
+});
 
-Template.adminLayouts.events({ 
-    'click #foo': function(event, template) { 
-         
-    } 
-}); 
+Template.adminLayouts.events({
+
+});
+
+Template.adminLayouts.onRendered(function () {
+    const self = this;
+    Meteor.call('admin.control', Meteor.userId(), function (error, result) {
+        if (error) {
+            console.log("error : ", error);
+        }
+        if (result) {
+            self.isAdmin.set(true);
+        }
+        self.isLoading.set(false);
+    });
+})

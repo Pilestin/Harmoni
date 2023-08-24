@@ -1,43 +1,40 @@
-<template name="homeCategories">
+<template name="categoryTemplate">
 
+  Burası genel kategori sayfası.
 
-    <div class="container">
-        Burası kategoriler olacak inş.
+  {{selectedCategoryUtil}}
+  <br>
+  {{selected}}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>Categories</h1>
+      </div>
     </div>
 
-    <div class="container mt-5">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <img src="kategori1.jpg" class="card-img-top" alt="Kategori 1">
-              <div class="card-body">
-                <h5 class="card-title">Pop Müzik</h5>
-                <p class="card-text">En popüler pop müzik şarkıları burada!</p>
-                <a href="#" class="btn btn-primary">Daha Fazla</a>
+    <!-- Musics --> 
+    <!-- <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Musics</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            {{#each musics}}
+              <div class="col-md-3">
+                <div class="thumbnail">
+                  <img src="{{image}}" alt="{{name}}">
+                  <div class="caption">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <p><a href="{{pathFor 'music' _id=name}}" class="btn btn-primary" role="button">View</a></p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <img src="kategori2.jpg" class="card-img-top" alt="Kategori 2">
-              <div class="card-body">
-                <h5 class="card-title">Rock Müzik</h5>
-                <p class="card-text">En iyi rock şarkıları ve grupları burada!</p>
-                <a href="#" class="btn btn-primary">Daha Fazla</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <img src="kategori3.jpg" class="card-img-top" alt="Kategori 3">
-              <div class="card-body">
-                <h5 class="card-title">Elektronik Müzik</h5>
-                <p class="card-text">Elektronik müzik tutkunları için özel seçkiler!</p>
-                <a href="#" class="btn btn-primary">Daha Fazla</a>
-              </div>
-            </div>
+            {{/each}}
           </div>
         </div>
-      </div>
+      </div> -->
+    </div>
 
 </template>

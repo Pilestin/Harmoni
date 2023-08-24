@@ -1,18 +1,34 @@
 <template name="adminUsers">
 
     <div class="container mt-5">
-        <h2>User List</h2>
+
+        <div class="d-flex justify-content-center">
+            <h2>User List</h2>
+        </div>
+        <hr>
+        <div class=" container d-flex justify-content-center align-items">
+            <input type="text" class="form-control" id="adminSearchUser" placeholder="Search User">
+            <label name = "adminSearchUser" class="form-label"></label>
+        </div>
+
+        <!-- <div class="mb-3 mt-3 container d-flex justify-content-end">
+            <button id="yok" type="button" class="btn btn-success text-black">
+                <i class="fa-solid fa-plus pe-3"></i>
+                Add User
+            </button>
+        </div> -->
+
         <table class="table">
             <thead >
                 <tr>
                     <th class="table-danger" scope="col">Image</th>
-                    <th class="table-danger"  scope="col">Name</th>
+                    <th class="table-danger" scope="col">Name</th>
                     <th class="table-danger" scope="col">Email</th>
                     <th class="table-danger" scope="col">Password</th>
                     <th class="table-danger" scope="col">Friend List</th>
                     <th class="table-danger" scope="col">FavouriteMusic</th>
-                    <th class="table-danger" scope="col">Düzenle</th>
-                    <th class="table-danger" scope="col">Sil</th>
+                    <th class="table-danger" scope="col">User Page</th>
+                    <th class="table-danger" scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,12 +41,12 @@
                     <td>{{friendList}}</td>
                     <td>{{favouriteMusic}}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm btnEditMusic">
+                        <button id="btnUserPage" data-id="{{_id}}" type="button" class="btn btn-info btn-sm ">
                             <i class="fa-solid fa-pen"></i> Düzenle
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm btnDeleteMusic">
+                        <button type="button" class="btn btn-danger btn-sm btnDeleteUser">
                             <i class="fa-regular fa-trash-can"></i> Sil
                         </button>
                     </td>

@@ -5,8 +5,13 @@ Template.componentsNavbar.events({
 
   'input #musicSearchInput': function (event, template) {
     event.preventDefault();
+    
+
     const query = document.getElementById('musicSearchInput').value;
-    console.log("query : ", query)
+    if (query.trim() === "" || query.trim().length < 3) {
+        // Boş bir sorgu olduğunda boş bir dizi döndür
+        return [];
+    }
 
     Meteor.call('music.search', query, function (err, res) {
       if (err) {

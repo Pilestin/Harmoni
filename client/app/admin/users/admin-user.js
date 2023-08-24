@@ -1,3 +1,4 @@
+import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 
 Template.adminUsers.onCreated(function() {
 
@@ -10,16 +11,27 @@ Template.adminUsers.onCreated(function() {
 Template.adminUsers.helpers({ 
     'allUsers': function(){
         const users = Meteor.users.find({}).fetch()
-        console.log("users : ", users);
         return users
     }
 
 }); 
 
 Template.adminUsers.events({ 
-    'click #foo': function(event, template) { 
-         
-    } 
+    'click .btnDeleteUser': function(event, template) { 
+        const user = this;
+        Meteor.call("user.delete", user, function(err, res){
+            if(err){
+                console.log("err : ", err)
+            }else{
+                console.log("res : ", res)
+            }
+        })
+    },
+    'click #btnUserPage': function( event, template) { 
+        event.preventDefault();
+        const user = this;
+        FlowRouter.go('/user/' + user._id);
+    }
 }); 
 
 Template.adminUsers.onDestroyed(function () {

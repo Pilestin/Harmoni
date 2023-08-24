@@ -1,13 +1,20 @@
 import { Webapp } from 'meteor/webapp';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import { type } from 'jquery';
 
 Template.pagesHome.onCreated(function () {
 
     this.subscribeUsers = this.subscribe('users.list'); // Kullanıcıları abone ediyoruz
     this.subscribeMusics = this.subscribe('music.list'); // Müzikleri abone ediyoruz
     this.subscribeMusicFiles = this.subscribe('files.musics'); // Müzik dosyalarını abone ediyoruz
-
+    this.subscribeCategory = this.subscribe('category.list'); // Kategori listesini abone ediyoruz
     this.categoryFlag = new ReactiveVar(false);
+    this.currentCategory = new ReactiveVar();
+
+    // this.currentPage = new ReactiveVar(1);
+    // this.perPage = new ReactiveVar(4);
+    // this.totalMusic = new ReactiveVar();
+
 });
 
 Template.pagesHome.onRendered(function () {
@@ -15,9 +22,6 @@ Template.pagesHome.onRendered(function () {
     const self = this;
 
     this.autorun(function () {
-
-
-
         if (self.subscribeMusicFiles.ready()) {
             const musicFiles = MusicFiles.find().fetch();
         }
@@ -44,6 +48,7 @@ Template.pagesHome.onRendered(function () {
                 }
             });
         }
+
     });
 });
 
@@ -53,14 +58,17 @@ Template.pagesHome.helpers({
         currentUser = Meteor.users.findOne({ _id: Meteor.userId() })
         return Meteor.user();
     },
-
     allUsers: function () {
         return Template.instance().users.get();
     },
-
     // Tüm müzikleri döndüren helper
     allMusic: function () {
-        return Music.find({}).fetch();
+        const currentPage = GlobalPagination.get('currentPage');
+        const perPage = GlobalPagination.get("perPage")
+
+        const start = (currentPage - 1) * perPage;
+
+        return Music.find({}, { skip: start, limit: perPage }).fetch();
         // return MusicFiles.find({}).fetch();
     },
     isFavourite: function (music) {
@@ -76,14 +84,52 @@ Template.pagesHome.helpers({
     categoryFlag: function () {
         return Template.instance().categoryFlag.get();
     },
+    allCategory: function () {
+        return Category.find({}).fetch();
+    },
+    currentCategory: function () {
+        const currentCategory = Template.instance().currentCategory.get();
+        SelectedCategory.set(currentCategory);
+        return Template.instance().currentCategory.get();
+    },
+    // Örn : Pop için categoryPop stringi döndürür
+    getTemplateByCategory: function (category) {
+        return this.templatesByCategory[category] || {}; // Eşleşen template adını veya boş bir nesneyi döndürün
+    },
+    pageInfo: function () {
+        let pagination = GlobalPagination.all();
 
+        console.log("pagination : ", pagination)
+
+        let currentPage = pagination.currentPage;
+        // let perPage = pagination.perPage;
+        // let total = pagination.total;
+        let totalPages = pagination.totalPages;
+
+        const pages = [];
+
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i)
+        }
+
+        const obj = {
+            currentPage: currentPage,
+            totalPages: pages,
+        }
+
+        console.log("obj : ", obj)
+
+        return obj;
+
+    },
 
 });
+
 
 const playMusic = function (music) {
     const musicFile = MusicFiles.findOne({ _id: music.fileId });
 
-    const musicUrl = 'http://192.168.31.67:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+    const musicUrl = 'http://localhost:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -102,7 +148,7 @@ const playMusic = function (music) {
         if (err) {
             console.log("err : ", err)
         }
-        console.log("res : ", res)
+        console.log("friend : ", res)
     });
 }
 // Playerdaki müzik bilgilerini değiştirmek için kullanılır
@@ -132,22 +178,25 @@ Template.pagesHome.events({
             }
         })
     },
-    // Bu fonksiyon müzik eklemek için gerekli olan Modal formunu açar
-    'click #btnShowModal': function (event, template) {
-        event.preventDefault()
-        window.$('#fileUploadModal').modal('show');
-    },
     // Bu metod çıkış yapmak içindir. 
     // - Logout butonuna basıldığında çalışır
     'click .brd-sign-out': function (event, template) {
-        Meteor.logout(function (error) {
+        const user = Meteor.user();
+        Meteor.logout(function (error, user) {
             if (error) {
                 // todo error handling
                 return
             }
-
-            FlowRouter.go('pages.home')
         })
+        console.log("user ms : ", user)
+        Meteor.call("user.setMusic", Meteor.user(), function (err, res) {
+            if (err) {
+                console.log("err : ", err)
+            } else {
+                console.log("res : ", res)
+            }
+        })
+        FlowRouter.go('pages.home')
     },
     // Bu metod Profil sayfasına yönlendirir. 
     // - Profil butonuna basıldığında çalışır
@@ -171,44 +220,22 @@ Template.pagesHome.events({
         audioInfoChanger(music);
         playMusic(music);
     },
-        // Bu metod arkadaşın dinlediği son müziği çalar
-        'click .btnPlayFriendsMusic': function (event, template) {
-            event.preventDefault()
-    
-            const friendId = this._id;
-            const friend = Meteor.users.findOne({ _id: friendId });
-            const music = friend.currentPlay;
-    
-            audioInfoChanger(music);
-            playMusic(music);
-        },
-    // Bu metod müzik silmek için çalışır.
-    'click #btnDeleteMusic': async function (event, template) {
+    // Bu metod arkadaşın dinlediği son müziği çalar
+    'click .btnPlayFriendsMusic': function (event, template) {
         event.preventDefault()
-        const music = this;
 
-        try {
-            const res = await new Promise((resolve, reject) => {
-                Meteor.call('music.delete', music, (err, res) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(res);
-                    }
-                });
-            });
+        const friendId = this._id;
+        const friend = Meteor.users.findOne({ _id: friendId });
+        const music = friend.currentPlay;
 
-            console.log("silme işlemi tamamlandı: ", res);
-        }
-        catch (err) {
-            console.log("err : ", err);
-        }
-
+        audioInfoChanger(music);
+        playMusic(music);
     },
     // Bu metod müzik favorilemek için çalışır.
     'click #btnFavouriteMusic': function (event, template) {
         event.preventDefault()
         const music = this;
+        // console.log(template.view.pagination)
 
         Meteor.call('user_favourite', music, function (err, res) {
             if (err) {
@@ -217,8 +244,6 @@ Template.pagesHome.events({
             console.log("res : ", res)
         })
     },
-
-
     // Bu metod müzik favorilemekten çıkarmak için çalışır.
     'click #btnUnFavouriteMusic': function (event, template) {
         event.preventDefault()
@@ -259,6 +284,41 @@ Template.pagesHome.events({
         const categoryFlag = template.categoryFlag.get();
 
         template.categoryFlag.set(false)
+    },
+    'click .categoryCard': function (event, template) {
+
+        const category = this;
+        template.currentCategory.set(category.name)
+    },
+    'click .page-link': function (event, template) {
+        event.preventDefault();
+
+        const clickedAction = event.target.getAttribute('data-action');
+        const dataPage = event.target.getAttribute('data-page');
+
+        if (clickedAction === 'previous') {
+
+            const current = GlobalPagination.get('currentPage');
+            if (current > 1) {
+                GlobalPagination.set('currentPage', current - 1);
+            }
+    
+        } 
+        else if (clickedAction === 'next') {
+
+            const current = GlobalPagination.get('currentPage');
+            const total = GlobalPagination.get('totalPages');
+            if (current < total) {
+                GlobalPagination.set('currentPage', current + 1);
+            }
+
+
+        } 
+        else {
+            // Belirli bir sayfaya gitme işlemini yapabilirsiniz
+            GlobalPagination.set('currentPage', parseInt(dataPage));
+        
+        }
     }
 
 });

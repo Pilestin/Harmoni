@@ -1,36 +1,142 @@
 {
     "User" : {
-      "_id" : "_??",
+      "_id": "sLQa83r6LAeZRvfG7",
+      "createdAt": {
+        "$date": "2023-07-28T12:55:18.090Z"
+      },
+      "services": {
+        "password": {
+          "bcrypt": "$2b$10$D74ETilWt9E/IM82W8L47u9HZ8IhHUoj3Ljst7FdefM9RbisAtZWy"
+        },
+        "resume": {
+          "loginTokens": [
+            {
+              "when": {
+                "$date": "2023-07-28T12:55:23.769Z"
+              },
+              "hashedToken": "hKbP3CLo+5yowRiRwdIpAZJY0TW8sHYwidiARcBDZQc="
+            }
+          ]
+        }
+      },
+      "emails": [
+        {
+          "address": "yasin@test.com",
+          "verified": false
+        }
+      ],
       "firstName": "Yasin",
       "lastName": "Ünal",
-      "email" : "yasin@test.com",
-      "password" : "123",
-      "favoriteList" : [
-        "_musicId"
+      "email": "yasin@test.com",
+      "password": {
+        "digest": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "algorithm": "sha-256"
+      },
+      "currentPlay": {
+        "_id": "ZGTjywcjgu3HA2Bio",
+        "name": "Queen of the Night aria from The Magic Flute by Mozart",
+        "artist": "Maria Callas",
+        "category": "Classic",
+        "image": "https://i1.sndcdn.com/artworks-000239998328-wpv0bf-t500x500.jpg",
+        "fileId": "s9koNNsK8r3CmSa9s",
+        "filePath": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics\\s9koNNsK8r3CmSa9s.mp3",
+        "createdAt": {
+          "$date": "2023-08-07T11:39:36.229Z"
+        },
+        "updatedAt": {
+          "$date": "2023-08-07T11:39:36.225Z"
+        }
+      },
+      "friendList": [
+        {
+          "_id": "QnpCASrxXi2Ag8JAG"
+        }
       ],
-      "currentPlay" : "musicId",
-      "friendList" : ["_userId"],
-      "createdAt" : "DATE",
-      "updatedAt" : "DATE"
+      "favouriteMusic": [
+        {
+          "_id": "ZGTjywcjgu3HA2Bio",
+          "name": "Queen of the Night aria from The Magic Flute by Mozart",
+          "artist": "Maria Callas",
+          "category": "Classic",
+          "image": "https://i1.sndcdn.com/artworks-000239998328-wpv0bf-t500x500.jpg",
+          "fileId": "s9koNNsK8r3CmSa9s",
+          "filePath": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics\\s9koNNsK8r3CmSa9s.mp3",
+          "createdAt": {
+            "$date": "2023-08-07T11:39:36.229Z"
+          },
+          "updatedAt": {
+            "$date": "2023-08-07T11:39:36.225Z"
+          }
+        }
+      ],
+      "profilePhoto": "https://i.kym-cdn.com/photos/images/original/001/562/649/6f0.jpg",
+      "status": {
+        "online": true,
+        "lastLogin": {
+          "date": {
+            "$date": "2023-08-17T11:46:22.663Z"
+          },
+          "ipAddr": "127.0.0.1",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+        },
+        "idle": false
+      }
     },
   
     "Music" : {
-      "_id" : "_??", 
-      "name" : "",
-      "artist": "",
-      "album": "",
-      "category" : "categoryId",
-      "year" : "",
-      "language" : "",
-      "file" : "FILE",
-      "createdAt" : "DATE",
-      "updatedAt" : "DATE"
+      "_id": "ZGTjywcjgu3HA2Bio",
+      "name": "Queen of the Night aria from The Magic Flute by Mozart",
+      "artist": "Maria Callas",
+      "category": "Classic",
+      "image": "https://i1.sndcdn.com/artworks-000239998328-wpv0bf-t500x500.jpg",
+      "fileId": "s9koNNsK8r3CmSa9s",
+      "filePath": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics\\s9koNNsK8r3CmSa9s.mp3",
+      "createdAt": {
+        "$date": "2023-08-07T11:39:36.229Z"
+      },
+      "updatedAt": {
+        "$date": "2023-08-07T11:39:36.225Z"
+      }
     },
   
+    "MusicFiles" : {
+        "_id": "s9koNNsK8r3CmSa9s",
+        "size": 4601711,
+        "type": "audio/mpeg",
+        "name": "Maria Callas sings Queen of the Night aria from The Magic Flute by Mozart.mp3",
+        "meta": {},
+        "ext": "mp3",
+        "extension": "mp3",
+        "extensionWithDot": ".mp3",
+        "mime": "audio/mpeg",
+        "mime-type": "audio/mpeg",
+        "userId": "sLQa83r6LAeZRvfG7",
+        "path": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics\\s9koNNsK8r3CmSa9s.mp3",
+        "versions": {
+          "original": {
+            "path": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics\\s9koNNsK8r3CmSa9s.mp3",
+            "size": 4601711,
+            "type": "audio/mpeg",
+            "extension": "mp3"
+          }
+        },
+        "_downloadRoute": "/cdn/storage",
+        "_collectionName": "MusicFiles",
+        "isVideo": false,
+        "isAudio": true,
+        "isImage": false,
+        "isText": false,
+        "isJSON": false,
+        "isPDF": false,
+        "_storagePath": "E:\\Kodlar\\Meteorjs\\music-app\\public\\musics",
+        "public": false
+      },
+
     "Categories" : {
       "_id" : "_??",
       "name" : "",
-      "description": ""
+      "description": "",
+      "imagePath" : "str"
     }
   
   }

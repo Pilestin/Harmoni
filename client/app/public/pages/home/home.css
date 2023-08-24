@@ -16,8 +16,6 @@
 }
 
 
-
-
 .user-info-container {
   width: 300px;
   height: 40px;
@@ -84,11 +82,11 @@
   background-color: rgb(39, 39, 36);
 }
 
-.category-card-classic {
+/* .category-card-classic {
   background-image: url('/images/category/classical.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; 
   height: 200px;
 
 }
@@ -115,4 +113,4 @@
   background-position: center;
   height: 200px;
 
-}
+} */

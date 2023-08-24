@@ -48,13 +48,6 @@ Meteor.methods({
     'music.search' : function(query) {
         const userId = Meteor.userId();
         const user = Meteor.users.findOne({ _id: userId });
-
-        
-
-        if (query.trim() === "" || query.trim().length < 3) {
-            // Boş bir sorgu olduğunda boş bir dizi döndür
-            return [];
-        }
         
         if (user) {
             const result = Music.find({
@@ -67,7 +60,24 @@ Meteor.methods({
             console.log("result : ", result)
             return result;
         }
-        
         return [];
-    }
+    },
+    'music.update': function(_id, obj) { 
+        const id = Music.update(_id, {
+            $set: {
+                name: obj.name,
+                artist: obj.artist,
+                album: obj.album,
+                category: obj.category,
+                year: obj.year,
+                language: obj.language,
+                image: obj.image,
+                updatedAt: new Date()
+            }
+        });
+        return id;
+    },
+    'getTotalMusic' : function() {
+        return Music.find().count();
+    },
 });

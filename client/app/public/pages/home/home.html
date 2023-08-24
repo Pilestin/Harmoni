@@ -10,7 +10,7 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="min-height: 100%">
 
 
-          <!-- MEEEEEEEEEEEEEEEEEEE -->
+          <!-- MEE -->
           <div class="dropdown">
             {{#with currentUser}}
               <a href="#" class="d-flex ms-3 align-items-center text-white text-decoration-none dropdown-toggle"
@@ -69,16 +69,6 @@
                   Other Users
                 </a>
               </li>
-              <li class="sidebar-items rounded-4 m-1">
-                <button id="btnShowModal" type="button" class="nav-link text-white">
-                  <svg class="bi me-2" width="16" height="16">
-
-                  </svg>
-                  <i class="fa-solid fa-plus pe-3"></i>
-                  Add Music
-                </button>
-              </li>
-
             </ul>
           </div>
 
@@ -99,19 +89,14 @@
             </div>
           </div>
 
-
           <br>
-
-
 
           <!-- FAVOURİTESSSSSSSSSSSSSS -->
           <div class="layoutFavourites rounded-5">
-
             <div class="container d-flex justify-content-center">
               <h2>Favourites</h2>
             </div>
             <hr>
-
             {{#with currentUser}}
               {{#each favouriteMusic}}
                 <!-- Buraya bir global helper mı gelmeli acaba : ! eq HATIRLA-->
@@ -122,19 +107,12 @@
                       <i class="fa-solid fa-heart text-danger"></i>
                       {{name}}</a></li>
                 </ul>
-
-
               {{/each}}
             {{/with}}
-
           </div>
-
           <br>
-          <br>
-
           <!-- FRİENDSSSSSSSSSSSSSS -->
           <div class="layoutFriends  rounded-5">
-
             <div class="container d-flex justify-content-center">
               <h2>Follows</h2>
             </div>
@@ -157,7 +135,6 @@
                           <small class="text-secondary"><i class="fa-solid fa-circle"
                               style="color: #ff1a1a;"></i></small>
                         {{/if}}
-
                       </div>
                       <span id="friendsMusicsArtist">{{friend.currentPlay.artist}}</span>
                       <p id="friendsMusicsName" class="mb-1 text-truncate">{{friend.currentPlay.name}}</p>
@@ -166,16 +143,11 @@
                 {{/let}}
               {{/each}}
             {{/with}}
-
           </div>
-
         </div>
-
       </div>
-
       <!-- RIGHT PANEL -->
       <div class="panelRight col-9 ps-3 pe-3">
-
         {{#if categoryFlag}}
           <div class="layoutCategory rounded-2 pb-3 mt-3">
             <div class="container text-white mt-3">
@@ -185,55 +157,54 @@
                 </div>
               </div>
             </div>
-            
             <div class="row">
+              {{#each allCategory}}
+                <div class="col-lg-6 col-md-4 col-sm-3 mb-3">
+                  <div class="card rounded-5 categoryCard btn"
+                    style="height: 200px; background-image: url({{imagePath}}); background-size: cover; background-repeat: no-repeat; background-position: center; ">
+                    <div class="position-absolute top-0 end-0 me-3 mt-2">
+                      <a class="text-decoration-none btn bg-dark"><i
+                          class="fa-solid fa-arrow-right text-danger"></i></a>
+                    </div>
 
-              <div class="col-lg-6 col-md-4 col-sm-3">
-                <div class="card rounded-5 category-card-classic ">
-                  <div class="card-body ">
-                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
-                    <p class="card-title text-truncate ">Classical Music</p>
-                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
+                    <div class="card-body ">
+                      <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
+                      <p class="card-title h3 text-white font-weight-bold text-truncate ">{{name}}</p>
+                      <p class="card-subtitle text-truncate text-muted">{{description}}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-lg-6 col-md-4 col-sm-3">
-                <div class="card rounded-5 category-card-pop ">
-                  <div class="card-body ">
-                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
-                    <p class="card-title text-truncate ">Pop Music</p>
-                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
-                  </div>
-                </div>
-              </div>
-
+              {{/each}}
             </div>
             <br>
-            <div class="row">
-              <div class="col-lg-6 col-md-4 col-sm-3">
-                <div class="card rounded-5 category-card-blues ">
-                  <div class="card-body ">
-                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
-                    <p class="card-title text-truncate ">Blues Music</p>
-                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-4 col-sm-3">
-                <div class="card rounded-5 category-card-turkish ">
-                  <div class="card-body ">
-                    <!-- <img src="/images/category/classical.jpg" width="100%" alt="Elektronik Müzik"> -->
-                    <p class="card-title text-truncate ">Turkish Music</p>
-                    <p class="card-subtitle text-truncate text-muted">Kategori Descr.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p class="text-white">burası içerik olur mu </p>
+            {{#if currentCategory}}
+              <div class="container text-white">
+                <p>Seçili olan kategori = {{currentCategory}}</p>
+                {{> categoryTemplate}}
+                <!-- {{#if eq currentCategory "Blues"}}
+                  {{> categoryBlues}}
+                {{/if}}
 
+                {{#if eq currentCategory "Pop"}}
+                  {{> categoryPop}}
+                {{/if}}
+
+                {{#if eq currentCategory "Turkish"}}
+                  {{> categoryTurkish}}
+                {{/if}}
+
+                {{#if eq currentCategory "Classical"}}
+                  {{> categoryClassical}}
+                {{/if}} -->
+              </div>
+            {{else}}
+              <div class="container text-white">
+                <p>Bir şey seçmedin : {{currentCategory}}</p>
+              </div>
+            {{/if}}
           </div>
         {{else}}
-
           <div class="layoutAllMusics rounded-2 pb-3 mt-3">
             <div class="container">
               <div class="row">
@@ -242,29 +213,21 @@
                 </div>
               </div>
             </div>
-
-
             <div class="container mt-5">
-
               <div class="row ">
-
                 {{#if searchResults}}
                   <div class="search-results">
                     <table class="table table-hover table-borderless">
                       <div class="container d-flex ">
-
                         <button id="btnShowResults" class="btn " type="button"><i
                             class="fa-solid fa-arrows-up-down bg-dark text-white"></i></button>
                         <h6 class="text-white mt-2">Search Results : </h6>
                       </div>
-
                       <tbody id="resultsBody">
                         {{#each searchResults}}
                           <tr class="table-info">
                             <td class="btnPlayThisMusic resultTd">
-
                               {{name}}
-
                             </td>
                           </tr>
                         {{/each}}
@@ -273,11 +236,9 @@
                     <div class="container mb-3" style="height: 20px;"></div>
                   </div>
                 {{/if}}
-
-
                 {{#each allMusic}}
-                  <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
-                    <div class="card rounded-4 " style="width: 11rem; background-color:rgb(167, 190, 209)">
+                  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="card rounded-4 " style="width: 14rem; background-color:rgb(167, 190, 209)">
                       <div class="card-body btn btnPlayThisMusic">
                         {{#if image}}
                           <img class="rounded-4" src="{{image}}" width="100" height="100">
@@ -299,42 +260,39 @@
                             id="btnFavouriteMusic"><i class="fa-regular fa-heart "></i></button>
                         {{/if}}
                       </div>
-
                     </div>
                   </div>
                 {{/each}}
               </div>
 
+
+
             </div>
-
-
-
             <nav style="position: relative" class="d-flex justify-content-center m-3"
               aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
+                <li class="page-item"><a class="page-link" href="#" data-action="previous">Previous</a></li>
 
+                {{#with pageInfo}}
+                  {{#each totalPages}}
+                    {{#if eq this ../currentPage}}
+                    <li class="page-item "><a class="page-link active " href="#" data-page="{{this}}">{{this}}</a></li>
+                    {{else}}
+                    <li class="page-item "><a class="page-link " href="#" data-page="{{this}}">{{this}}</a></li>
+                    {{/if}}
+                    {{/each}}
+                {{/with}}
+                <li class="page-item"><a class="page-link" href="#" data-action="next">Next</a></li>
+
+              </ul>
             </nav>
 
             <div class="d-flex justify-content-end ">
               <button type="button" class="btn btn-danger" id="getApi">API request</button>
             </div>
-
-
           </div>
         {{/if}}
       </div>
-
     </div>
-
   </div>
-
-  {{> pagesModalAddMusic}}
-
-
 </template>

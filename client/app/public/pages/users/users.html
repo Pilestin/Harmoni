@@ -111,17 +111,38 @@
 
 
   </div>
-  <div class="container bg-light rounded-5">
-    <h6>Your Follows</h6>
-    <br>
-    <ul>
-      {{#each myFriends}}
-        {{#with friend= (whoIs this._id)}}
-          <li>{{friend.firstName}} {{friend.lastName}}</li>
-        {{/with}}
-      {{/each}}
-    </ul>
+  <div class="row">
+    <div class="col-6">
+      <div class="container bg-light rounded-5">
+        <h6>Following</h6>
+        <br>
+        <ul>
+          {{#each myFriends}}
+            {{#with friend= (whoIs this._id)}}
+              <li>{{friend.firstName}} {{friend.lastName}}</li>
+            {{/with}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="container bg-light rounded-5">
+        <h6>Followers</h6>
+        <br>
+        <ul>
+          {{#each myFollowers}}
+            <!-- {{#with followers= (whoIs this._id)}}
+              <li>{{friend.firstName}} {{friend.lastName}}</li>
+            {{/with}} -->
+            <li>{{followers}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
   </div>
+
+
+
 
 
 
