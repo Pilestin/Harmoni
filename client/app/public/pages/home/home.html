@@ -8,8 +8,6 @@
       <div class="panelLeft col-3">
 
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="min-height: 100%">
-
-
           <!-- MEE -->
           <div class="dropdown">
             {{#with currentUser}}
@@ -36,12 +34,10 @@
               </li>
             </ul>
           </div>
-
           <hr>
           <!-- LEFT MENUUUUUUUU  -->
           <div class="col">
             <ul class="nav nav-pills flex-column ">
-
               <li class="sidebar-items rounded-4  m-1">
                 <button id="btnMenuMusic" class="nav-link text-white">
                   <svg class="bi me-2" width="16" height="16">
@@ -71,12 +67,9 @@
               </li>
             </ul>
           </div>
-
           <br>
-
           <!-- NOW PLAYİNGGGGGGGGGGGG -->
           <div class="container text-white">
-
             <hr>
             <div class="d-flex justify-content-center align-items-center">
               <span id="nowPlaying">Now Playing </span>
@@ -88,9 +81,7 @@
               {{/with}}
             </div>
           </div>
-
           <br>
-
           <!-- FAVOURİTESSSSSSSSSSSSSS -->
           <div class="layoutFavourites rounded-5">
             <div class="container d-flex justify-content-center">
@@ -209,7 +200,7 @@
             <div class="container">
               <div class="row">
                 <div class="d-flex justify-content-around align-items-center">
-                  <h2 class="text-white">Musics</h2>
+                  <h2 class="text-white">New Musics</h2>
                 </div>
               </div>
             </div>
@@ -276,11 +267,12 @@
                 {{#with pageInfo}}
                   {{#each totalPages}}
                     {{#if eq this ../currentPage}}
-                    <li class="page-item "><a class="page-link active " href="#" data-page="{{this}}">{{this}}</a></li>
+                      <li class="page-item "><a class="page-link bg-info " href="#" data-page="{{this}}">{{this}}</a>
+                      </li>
                     {{else}}
-                    <li class="page-item "><a class="page-link " href="#" data-page="{{this}}">{{this}}</a></li>
+                      <li class="page-item "><a class="page-link " href="#" data-page="{{this}}">{{this}}</a></li>
                     {{/if}}
-                    {{/each}}
+                  {{/each}}
                 {{/with}}
                 <li class="page-item"><a class="page-link" href="#" data-action="next">Next</a></li>
 

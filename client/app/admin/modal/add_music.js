@@ -48,8 +48,8 @@ Template.adminModalAddMusic.events({
             createdAt: new Date(),
             updatedAt: new Date()
           };
+          
           try {
-
             Meteor.call('music.add', obj, (error, result) => {
               if (error) {
                 console.log("error: ", error);

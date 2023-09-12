@@ -1,6 +1,5 @@
-import { Webapp } from 'meteor/webapp';
+import { WebApp } from 'meteor/webapp';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
-import { type } from 'jquery';
 
 Template.pagesHome.onCreated(function () {
 
@@ -129,7 +128,7 @@ Template.pagesHome.helpers({
 const playMusic = function (music) {
     const musicFile = MusicFiles.findOne({ _id: music.fileId });
 
-    const musicUrl = 'http://localhost:3000/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
+    const musicUrl = 'https://harmoni.eu.meteorapp.com/musics/' + musicFile._id + musicFile.extensionWithDot; // Sunucudan alacağınız müzik dosyasının URL'si
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
