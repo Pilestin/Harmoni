@@ -11,15 +11,15 @@ Meteor.startup(() => {
   // Migrations.migrateTo(1);
 
   // Bu kodu yazan cennetlik 
-  WebApp.connectHandlers.use('/musics', (req, res) => {
-    const musicFile = Assets.absoluteFilePath('musics/' + req.url.slice(1));
+  // WebApp.connectHandlers.use('/musics', (req, res) => {
+  //   const musicFile = Assets.absoluteFilePath('musics/' + req.url.slice(1));
 
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Content-Disposition', 'attachment');
-    res.writeHead(200);
-    const readStream = fs.createReadStream(musicFile);
-    readStream.pipe(res);
-  });
+  //   res.setHeader('Content-Type', 'audio/mpeg');
+  //   res.setHeader('Content-Disposition', 'attachment');
+  //   res.writeHead(200);
+  //   const readStream = fs.createReadStream(musicFile);
+  //   readStream.pipe(res);
+  // });
 
   // WebApp.connectHandlers.use('/musics/:trackId', (req, res, next) => {
   //   const { trackId } = req.params;
